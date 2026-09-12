@@ -1,0 +1,1 @@
+Full framework skeleton with src/main and src/test.

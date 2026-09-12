@@ -1,0 +1,1 @@
+package com.company.framework.pages; public class BasePage {}

@@ -1,0 +1,1 @@
+package com.company.framework.utils; public class WaitUtils {}
