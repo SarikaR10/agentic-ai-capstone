@@ -1,0 +1,12 @@
+{
+  "runId": "DEMO-1",
+  "ticketKey": "DEMO-1",
+  "title": "Add \"Remember Me\" checkbox to login page",
+  "type": "Story",
+  "priority": "P2",
+  "components": ["login"],
+  "testTypes": ["functional", "ui", "regression"],
+  "automationInScope": true,
+  "riskLevel": "Low",
+  "summary": "UI + functional addition of a 'Remember Me' checkbox on the login page (LoginPage.java, login.feature) that persists the session for 30 days when checked; regression risk is low since the change is isolated to the login module."
+}

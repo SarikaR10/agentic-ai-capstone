@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "SubagentStop": [
+      {
+        "type": "command",
+        "command": "node .github/hooks/scripts/token-meter.js",
+        "timeout": 10
+      }
+    ]
+  }
+}

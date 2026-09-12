@@ -1,0 +1,11 @@
+{
+  "runId": "DEMO-1",
+  "currentPhase": 2,
+  "status": "in_progress",
+  "phases": {
+    "0": { "status": "done", "artifact": "ph0_classification.json", "completedAt": "2026-09-12T00:00:00Z" },
+    "1": { "status": "done", "artifact": "ph1_test_plan.md", "completedAt": "2026-09-12T00:00:00Z" },
+    "2": { "status": "done", "artifact": "ph2_test_cases.md", "completedAt": "2026-09-12T00:00:00Z" }
+  },
+  "retryLimits": { "ph3_to_ph2": 3, "ph5_to_ph4": 3, "ph7_ph8_cycle": 3 }
+}

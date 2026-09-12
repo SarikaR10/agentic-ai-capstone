@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "SubagentStart": [
+      {
+        "type": "command",
+        "command": "node .github/hooks/scripts/budget-guard.js",
+        "timeout": 10
+      }
+    ]
+  }
+}

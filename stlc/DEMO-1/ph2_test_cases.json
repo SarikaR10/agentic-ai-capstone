@@ -1,0 +1,74 @@
+[
+  {
+    "id": "TC-001",
+    "title": "Remember Me checkbox is visible on login page",
+    "preconditions": "User is on the login page",
+    "steps": ["Navigate to the login page"],
+    "expectedResult": "Checkbox labeled \"Remember Me\" is displayed alongside username/password fields",
+    "priority": "P2",
+    "type": "functional"
+  },
+  {
+    "id": "TC-002",
+    "title": "Login with Remember Me checked persists session for 30 days",
+    "preconditions": "User has valid credentials",
+    "steps": ["Navigate to login page", "Enter valid username/password", "Check \"Remember Me\"", "Submit login"],
+    "expectedResult": "Login succeeds; session/auth cookie or token is created with an expiry of ~30 days",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-003",
+    "title": "Login with Remember Me unchecked uses default session length",
+    "preconditions": "User has valid credentials",
+    "steps": ["Navigate to login page", "Enter valid username/password", "Leave \"Remember Me\" unchecked", "Submit login"],
+    "expectedResult": "Login succeeds; session/auth cookie or token uses the standard (non-30-day) expiry",
+    "priority": "P1",
+    "type": "regression"
+  },
+  {
+    "id": "TC-004",
+    "title": "Session persists after browser restart when Remember Me checked",
+    "preconditions": "User logged in previously with \"Remember Me\" checked",
+    "steps": ["Login with \"Remember Me\" checked", "Close and reopen the browser", "Navigate to the application"],
+    "expectedResult": "User remains logged in without re-entering credentials",
+    "priority": "P2",
+    "type": "functional"
+  },
+  {
+    "id": "TC-005",
+    "title": "Session does not persist after browser restart when Remember Me unchecked",
+    "preconditions": "User logged in previously without checking \"Remember Me\"",
+    "steps": ["Login with \"Remember Me\" unchecked", "Close and reopen the browser", "Navigate to the application"],
+    "expectedResult": "User is prompted to log in again",
+    "priority": "P2",
+    "type": "regression"
+  },
+  {
+    "id": "TC-006",
+    "title": "Invalid login attempt with Remember Me checked",
+    "preconditions": "User has invalid credentials",
+    "steps": ["Navigate to login page", "Enter invalid username/password", "Check \"Remember Me\"", "Submit login"],
+    "expectedResult": "Login fails with an error message; no session/cookie is created",
+    "priority": "P2",
+    "type": "negative"
+  },
+  {
+    "id": "TC-007",
+    "title": "Remember Me checkbox state does not persist across separate login attempts",
+    "preconditions": "User is on the login page",
+    "steps": ["Navigate to login page", "Check \"Remember Me\"", "Do not submit; reload the login page"],
+    "expectedResult": "Checkbox resets to unchecked on page reload",
+    "priority": "P3",
+    "type": "edge"
+  },
+  {
+    "id": "TC-008",
+    "title": "Existing valid login flow unaffected by new checkbox",
+    "preconditions": "User has valid credentials",
+    "steps": ["Navigate to login page", "Enter valid username/password", "Submit login without interacting with the checkbox"],
+    "expectedResult": "Login succeeds as before; checkbox defaults to unchecked",
+    "priority": "P1",
+    "type": "regression"
+  }
+]

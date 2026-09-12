@@ -1,0 +1,9 @@
+{
+  "totalRunBudget": 50000,
+  "tierCaps": {
+    "light": 3000,
+    "standard": 8000,
+    "deep": 15000
+  },
+  "note": "Estimated tokens (chars/4 heuristic), not billed usage — see .github/skills/_shared/stlc-conventions.md. Edit these caps to fit your budget; stlc-budget-guard reads this file before starting each phase subagent."
+}
