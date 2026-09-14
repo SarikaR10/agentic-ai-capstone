@@ -1,0 +1,12 @@
+{
+  "runId": "FG-003",
+  "ticketKey": "FG-003",
+  "title": "Enforce minor beneficiary rule - require DOB or guardianName consistently on create/update",
+  "type": "Story",
+  "priority": "P2",
+  "components": ["beneficiary-management", "user-profile"],
+  "testTypes": ["functional", "regression"],
+  "automationInScope": true,
+  "riskLevel": "Medium",
+  "summary": "Implement validation rules to ensure that when creating or updating a minor beneficiary record, either DOB (Date of Birth) or guardianName is consistently required. This affects both API and UI create/update flows and requires comprehensive test coverage for data validation edge cases."
+}

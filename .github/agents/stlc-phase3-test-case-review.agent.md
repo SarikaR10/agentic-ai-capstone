@@ -13,4 +13,4 @@ You run STLC pipeline Phase 3 (Test Case Review) only. Load and follow [stlc-tes
 ## Constraints
 - Do NOT perform any other phase's work, and do NOT edit the test cases yourself — only review them.
 - Only REJECT for material coverage/quality gaps, not minor wording nitpicks (max 3 review cycles total for this run).
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.

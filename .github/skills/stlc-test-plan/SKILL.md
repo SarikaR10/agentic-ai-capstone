@@ -5,32 +5,19 @@ description: 'STLC pipeline Phase 1 — produce a test plan document from the Ph
 
 # STLC Phase 1 — Test Plan
 
-See [shared conventions](../_shared/stlc-conventions.md) for run-id, directory layout, and the return-verdict contract — read it first.
+See [shared conventions](../_shared/stlc-conventions.md) for run-id, the JSON handoff contract, and phase output rules — read it first.
 
 ## When to Use
 Invoked by `stlc-phase1-test-plan` agent after Phase 0 completes.
 
 ## Input
-- `stlc/<run-id>/ph0_classification.json`
+- Phase 0 JSON handoff supplied by the orchestrator.
 
 ## Procedure
-1. Read the classification artifact.
+1. Read the classification JSON handoff supplied in the prompt.
 2. Draft a concise test plan covering: scope & objectives, test approach (manual/automated split, driven by `automationInScope`), features in/out of scope, environment & test data needs, entry/exit criteria, risks & mitigations, and a rough schedule/effort note.
 3. Keep it proportional to `riskLevel`/`priority` — a `Low`/`P4` ticket gets a short plan, not a 5-page document.
-4. Write `stlc/<run-id>/ph1_test_plan.md`.
-
-## Output Template (`ph1_test_plan.md`)
-```markdown
-# Test Plan — <ticketKey>: <title>
-
-## Scope & Objectives
-## Test Approach
-## In Scope / Out of Scope
-## Environment & Test Data
-## Entry / Exit Criteria
-## Risks & Mitigations
-## Schedule
-```
+4. Put the complete test plan in the JSON handoff `details` object. Do not write a phase artifact.
 
 ## Output Format
-End with the return-verdict block (`VERDICT: DONE`) per shared conventions.
+Return exactly one JSON handoff with `phase: 1`, `verdict: "DONE"`, `details` containing the complete plan, and `next: "orchestrator"`.

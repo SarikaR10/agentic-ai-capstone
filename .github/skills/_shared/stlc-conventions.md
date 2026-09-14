@@ -4,29 +4,19 @@ Single source of truth referenced by all `stlc-*` skills, phase agents, the orch
 
 ## Run identity
 - `run-id` = normalized Jira ticket key (e.g. `PROJ-123`, slashes/spaces replaced with `-`).
-- All artifacts for a run live under `stlc/<run-id>/`.
+- The orchestrator owns the run context and passes the previous phase's JSON handoff to the next phase.
+- Phase agents must not create phase report artifacts. They may edit required product/test source files and stage those changes when their phase requires it.
 
-## Directory layout
+## Runtime directory layout
 ```
 stlc/
   config/
     token-budget.json         # user-editable spend caps
   knowledge/
-    lessons.md                # cross-run learnings (rejections, fixes) — read before generating, appended after review/heal phases
+    lessons.md                # optional cross-run learnings, supplied by the orchestrator when relevant
   <run-id>/
-    state.json                 # ledger: phase, status, retry counts, artifact paths, timestamps — used to resume a failed run
+    state.json                 # ledger: phase, status, retry counts, timestamps — used to resume a failed run
     token_ledger.jsonl          # append-only estimated token usage per phase (written by stlc-token-meter hook)
-    ph0_classification.json
-    ph1_test_plan.md
-    ph2_test_cases.md
-    ph2_test_cases.json
-    ph3_test_case_review.md
-    ph4_automation_manifest.md
-    ph5_automation_review.md
-    ph6_fix_manifest.md
-    ph7_execution_report.md
-    ph8_self_heal_report.md
-    ph9_ptr.md
 ```
 
 ## state.json schema
@@ -36,8 +26,8 @@ stlc/
   "currentPhase": 2,
   "status": "in_progress",            // in_progress | paused_human_gate | failed | completed
   "phases": {
-    "0": { "status": "done", "artifact": "ph0_classification.json", "completedAt": "..." },
-    "3": { "status": "rejected", "retryCount": 1, "artifact": "ph3_test_case_review.md" }
+    "0": { "status": "done", "completedAt": "..." },
+    "3": { "status": "rejected", "retryCount": 1 }
   },
   "retryLimits": { "ph3_to_ph2": 3, "ph5_to_ph4": 3, "ph7_ph8_cycle": 3 }
 }
@@ -49,13 +39,20 @@ stlc/
 - Ph6 runs exactly once, always followed by a human-gate pause before Ph7.
 - Ph7 ⇄ Ph8 execute/self-heal cycle, max 3 attempts, then escalate to human.
 
-## Return-verdict contract (every phase skill)
-Each phase agent must end its turn with a **short** structured verdict block (not the full artifact content — that belongs in the artifact file, kept out of the conversation to save tokens):
+## JSON handoff contract (every phase agent)
+Each phase agent must return exactly one compact JSON object to the orchestrator and must not hand off directly to another phase agent. The object contains the phase result and all information the orchestrator needs to route the next call:
 ```
-VERDICT: <PASS|REJECT|OPEN_FIXES|DONE|FAIL>
-ARTIFACT: stlc/<run-id>/phN_xxx.*
-SUMMARY: <1-3 sentences>
+{
+  "phase": 0,
+  "verdict": "DONE",
+  "summary": "1-3 sentences",
+  "details": {},
+  "next": "orchestrator"
+}
 ```
+- `verdict` must be one of `PASS`, `REJECT`, `OPEN_FIXES`, `DONE`, or `FAIL`.
+- `details` must contain the structured phase output needed by a later phase; do not replace it with a file path.
+- The orchestrator must pass the JSON handoff, or the relevant `details`, explicitly in the next subagent prompt.
 
 ## Automation code conventions (Ph4 / Ph6 / Ph8)
 Follow existing framework structure — do not invent a different layout:
@@ -78,5 +75,5 @@ Follow existing framework structure — do not invent a different layout:
 
 Exact model names are pinned in each phase agent's frontmatter — adjust there, not per-skill.
 
-## Lessons log (`stlc/knowledge/lessons.md`)
-Append one short bullet per entry: `- [<run-id>][PhN] <what went wrong> -> <what to do instead>`. Ph3/Ph5/Ph8 append; Ph2/Ph4 read the file before generating to avoid repeating known mistakes.
+## Lessons context
+Lessons, when available, are supplied by the orchestrator as JSON context. Phase agents must not append to `stlc/knowledge/lessons.md` or create another phase artifact; the orchestrator owns any cross-run persistence policy.

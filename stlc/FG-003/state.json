@@ -1,0 +1,38 @@
+{
+  "runId": "FG-003",
+  "currentPhase": 5,
+  "status": "in_progress",
+  "phases": {
+    "0": {
+      "status": "done",
+      "artifact": "ph0_classification.json",
+      "completedAt": "2026-09-13T00:00:00Z"
+    },
+    "1": {
+      "status": "done",
+      "artifact": "ph1_test_plan.md",
+      "completedAt": "2026-09-13T00:00:00Z"
+    },
+    "2": {
+      "status": "done",
+      "artifact": "ph2_test_cases.md",
+      "completedAt": "2026-09-13T00:00:00Z"
+    },
+    "3": {
+      "status": "done",
+      "artifact": "ph3_test_case_review.md",
+      "completedAt": "2026-09-13T00:00:00Z"
+    },
+    "4": {
+      "status": "done",
+      "artifact": "ph4_automation_manifest.md",
+      "completedAt": "2026-09-13T00:00:00Z"
+    }
+  },
+  "retryLimits": {
+    "ph3_to_ph2": 3,
+    "ph5_to_ph4": 3,
+    "ph7_ph8_cycle": 3
+  },
+  "createdAt": "2026-09-13T00:00:00Z"
+}

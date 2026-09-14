@@ -13,4 +13,4 @@ You run STLC pipeline Phase 9 (Project Test Report) only — this is the termina
 ## Constraints
 - Do NOT attempt to post to Jira — Jira MCP is not configured; write the comment as a section for the user to paste manually.
 - Label any token-usage figures clearly as estimates (see shared conventions), never as billed usage.
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.

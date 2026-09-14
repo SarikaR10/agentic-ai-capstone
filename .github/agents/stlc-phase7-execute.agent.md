@@ -13,4 +13,4 @@ You run STLC pipeline Phase 7 (Execute) only. Load and follow [stlc-execute](../
 ## Constraints
 - Do NOT perform any other phase's work, and do NOT attempt to fix failures yourself — Phase 8 handles that.
 - Rely on the `stlc-test-results-parser` hook's compact JSON summary rather than reading raw XML/console output.
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.

@@ -13,5 +13,5 @@ You run STLC pipeline Phase 2 (Test Cases) only. Load and follow [stlc-test-case
 ## Constraints
 - Do NOT perform any other phase's work.
 - If invoked as a rerun after a Phase 3 rejection, you MUST read the Phase 3 review feedback and address every listed issue.
-- Check `stlc/knowledge/lessons.md` before writing to avoid repeating known mistakes.
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact files.
+- Use any lessons context supplied in the orchestrator's JSON handoff to avoid repeating known mistakes.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create phase artifacts or hand off to another phase agent.

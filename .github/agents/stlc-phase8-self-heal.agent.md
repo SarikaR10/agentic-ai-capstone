@@ -14,5 +14,5 @@ You run STLC pipeline Phase 8 (Self-Heal) only. Load and follow [stlc-self-heal]
 - Do NOT perform any other phase's work, and do NOT re-run the suite yourself — the orchestrator re-invokes Phase 7.
 - Do NOT weaken assertions to mask a genuine product defect — flag it instead of "fixing" it.
 - Only `git add` to stage — never commit (also enforced by the `stlc-git-guard` hook).
-- Append a lesson to `stlc/knowledge/lessons.md` for each fix made.
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return lesson-worthy findings in the JSON handoff; do not append to a lesson file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.

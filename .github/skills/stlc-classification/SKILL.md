@@ -5,7 +5,7 @@ description: 'STLC pipeline Phase 0 — classify a Jira ticket or pasted require
 
 # STLC Phase 0 — Classification
 
-See [shared conventions](../_shared/stlc-conventions.md) for run-id, directory layout, and the return-verdict contract — read it first.
+See [shared conventions](../_shared/stlc-conventions.md) for run-id, the JSON handoff contract, and phase output rules — read it first.
 
 ## When to Use
 Invoked by `stlc-phase0-classification` agent (or manually) at the start of an STLC pipeline run.
@@ -17,10 +17,9 @@ Invoked by `stlc-phase0-classification` agent (or manually) at the start of an S
 ## Procedure
 1. Determine `run-id` from the ticket key (see shared conventions for normalization).
 2. Extract: title, ticket type (`Story`|`Bug`|`Enhancement`|`Task`), priority, affected components/modules, applicable test types (`functional`, `regression`, `smoke`, `api`, `ui`, `db`), whether automation is in scope, and an overall risk level (`Low`|`Medium`|`High`) based on blast radius and priority.
-3. Write `stlc/<run-id>/ph0_classification.json` using the schema below.
-4. Create `stlc/<run-id>/state.json` if it doesn't exist yet (phase 0 entry, `status: in_progress`).
+3. Return the classification in the `details` property of the JSON handoff. Do not write a phase artifact or create `state.json`; the orchestrator and its hooks own run state.
 
-## Output Schema (`ph0_classification.json`)
+## Output Schema (`details`)
 ```json
 {
   "runId": "PROJ-123",
@@ -37,4 +36,4 @@ Invoked by `stlc-phase0-classification` agent (or manually) at the start of an S
 ```
 
 ## Output Format
-End with the return-verdict block (`VERDICT: DONE`) per shared conventions. Do not restate the JSON content in the chat response — the file is the deliverable.
+Return exactly one JSON handoff with `phase: 0`, `verdict: "DONE"`, `details` containing the schema above, and `next: "orchestrator"`.

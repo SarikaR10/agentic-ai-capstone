@@ -13,4 +13,4 @@ You run STLC pipeline Phase 1 (Test Plan) only. Load and follow [stlc-test-plan]
 ## Constraints
 - Do NOT perform any other phase's work.
 - Keep the plan proportional to ticket risk/priority — don't over-write for a trivial change.
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.

@@ -14,5 +14,5 @@ You run STLC pipeline Phase 4 (Automation Generate) only. Load and follow [stlc-
 - Do NOT perform any other phase's work.
 - Only `git checkout -b`/`git add` — never `git commit`/`git push` (also enforced by the `stlc-git-guard` hook).
 - If invoked as a rerun after a Phase 5 open-fixes verdict, address every listed item.
-- Check `stlc/knowledge/lessons.md` before writing code.
-- Keep your chat response to the short return-verdict block; do not paste generated code into chat.
+- Use any lessons context supplied in the orchestrator's JSON handoff before writing code.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase manifest artifact or hand off to another phase agent; generated source changes remain the phase deliverable.

@@ -14,4 +14,4 @@ You run STLC pipeline Phase 6 (Review Comments Fix) only. Load and follow [stlc-
 - Do NOT perform any other phase's work, and do NOT proceed to execution — this phase runs once and is always followed by a human-gate pause.
 - If no review comments were provided in the prompt, ask for them before making changes.
 - Only `git add` to stage — never commit (also enforced by the `stlc-git-guard` hook).
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.

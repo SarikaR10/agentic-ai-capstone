@@ -1,0 +1,229 @@
+[
+  {
+    "id": "TC-001",
+    "title": "Create beneficiary with valid DOB only (no guardian)",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"John\", dob=\"2015-06-15\", guardianName=null"
+    ],
+    "expectedResult": "HTTP 201, beneficiary created with dob populated",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-002",
+    "title": "Create beneficiary with valid guardian name only (no DOB)",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Jane\", guardianName=\"Mary Smith\", dob=null"
+    ],
+    "expectedResult": "HTTP 201, beneficiary created with guardianName populated",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-003",
+    "title": "Create beneficiary with both DOB and guardian name",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Bob\", dob=\"2014-03-20\", guardianName=\"John Doe\""
+    ],
+    "expectedResult": "HTTP 201, beneficiary created with both fields",
+    "priority": "P2",
+    "type": "functional"
+  },
+  {
+    "id": "TC-004",
+    "title": "Create beneficiary with missing DOB and guardianName",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Alice\", dob=null, guardianName=null"
+    ],
+    "expectedResult": "HTTP 400 Bad Request with error message \"Either DOB or guardianName is required\"",
+    "priority": "P1",
+    "type": "negative"
+  },
+  {
+    "id": "TC-005",
+    "title": "Create beneficiary with empty DOB and empty guardianName",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Tom\", dob=\"\", guardianName=\"\""
+    ],
+    "expectedResult": "HTTP 400 Bad Request with validation error",
+    "priority": "P1",
+    "type": "negative"
+  },
+  {
+    "id": "TC-006",
+    "title": "Create beneficiary with whitespace-only guardian name",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Tim\", dob=null, guardianName=\"   \""
+    ],
+    "expectedResult": "HTTP 400 Bad Request, treated as empty",
+    "priority": "P2",
+    "type": "edge"
+  },
+  {
+    "id": "TC-007",
+    "title": "Create beneficiary with DOB in future",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Future\", dob=\"2030-01-01\", guardianName=null"
+    ],
+    "expectedResult": "HTTP 400 Bad Request with error \"DOB cannot be in the future\"",
+    "priority": "P2",
+    "type": "edge"
+  },
+  {
+    "id": "TC-008",
+    "title": "Create beneficiary with invalid DOB format",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with name=\"Invalid\", dob=\"15/06/2015\", guardianName=null"
+    ],
+    "expectedResult": "HTTP 400 Bad Request, invalid date format",
+    "priority": "P2",
+    "type": "negative"
+  },
+  {
+    "id": "TC-009",
+    "title": "Update beneficiary - remove DOB, keep guardianName",
+    "preconditions": "Beneficiary exists with dob and guardianName",
+    "steps": [
+      "PATCH /beneficiaries/{id} with dob=null, guardianName=\"Mary\""
+    ],
+    "expectedResult": "HTTP 200, DOB removed but guardianName retained",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-010",
+    "title": "Update beneficiary - remove guardianName, keep DOB",
+    "preconditions": "Beneficiary exists with dob and guardianName",
+    "steps": [
+      "PATCH /beneficiaries/{id} with guardianName=null, dob=\"2015-01-01\""
+    ],
+    "expectedResult": "HTTP 200, guardianName removed but DOB retained",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-011",
+    "title": "Update beneficiary - remove both DOB and guardianName",
+    "preconditions": "Beneficiary exists with dob and guardianName",
+    "steps": [
+      "PATCH /beneficiaries/{id} with dob=null, guardianName=null"
+    ],
+    "expectedResult": "HTTP 400 Bad Request \"Either DOB or guardianName is required\"",
+    "priority": "P1",
+    "type": "negative"
+  },
+  {
+    "id": "TC-012",
+    "title": "Update beneficiary - add guardian name to DOB-only record",
+    "preconditions": "Beneficiary exists with only DOB",
+    "steps": [
+      "PATCH /beneficiaries/{id} adding guardianName=\"John\""
+    ],
+    "expectedResult": "HTTP 200, guardianName added successfully",
+    "priority": "P2",
+    "type": "functional"
+  },
+  {
+    "id": "TC-013",
+    "title": "UI Create form - submit without DOB or guardian name",
+    "preconditions": "UI form open, browser ready",
+    "steps": [
+      "Enter name, skip DOB and guardian fields",
+      "Click Save"
+    ],
+    "expectedResult": "Form shows validation error \"Either DOB or Guardian Name is required\"",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-014",
+    "title": "UI Create form - submit with valid DOB",
+    "preconditions": "UI form open, browser ready",
+    "steps": [
+      "Enter name and DOB",
+      "Leave guardian name blank",
+      "Click Save"
+    ],
+    "expectedResult": "Beneficiary created, confirmation message shown",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-015",
+    "title": "UI Create form - submit with valid guardian name",
+    "preconditions": "UI form open, browser ready",
+    "steps": [
+      "Enter name and guardian name",
+      "Leave DOB blank",
+      "Click Save"
+    ],
+    "expectedResult": "Beneficiary created, confirmation message shown",
+    "priority": "P1",
+    "type": "functional"
+  },
+  {
+    "id": "TC-016",
+    "title": "UI Update form - attempt to clear both fields",
+    "preconditions": "Beneficiary edit form open, both fields populated",
+    "steps": [
+      "Clear DOB field",
+      "Clear guardian name field",
+      "Click Save"
+    ],
+    "expectedResult": "Form validation error displayed, data not saved",
+    "priority": "P2",
+    "type": "negative"
+  },
+  {
+    "id": "TC-017",
+    "title": "Regression - existing create flow with both fields still works",
+    "preconditions": "API ready, no code changes to existing logic",
+    "steps": [
+      "POST /beneficiaries with complete data including dob and guardianName"
+    ],
+    "expectedResult": "HTTP 201, beneficiary created as before",
+    "priority": "P1",
+    "type": "regression"
+  },
+  {
+    "id": "TC-018",
+    "title": "Regression - existing update flow still works",
+    "preconditions": "Beneficiary exists, no code changes to existing logic",
+    "steps": [
+      "PATCH /beneficiaries/{id} with partial update"
+    ],
+    "expectedResult": "HTTP 200, update completes successfully",
+    "priority": "P1",
+    "type": "regression"
+  },
+  {
+    "id": "TC-019",
+    "title": "Regression - list beneficiaries shows all records",
+    "preconditions": "Multiple beneficiaries in database, no code changes",
+    "steps": [
+      "GET /beneficiaries"
+    ],
+    "expectedResult": "HTTP 200, all beneficiaries returned with dob/guardianName fields",
+    "priority": "P2",
+    "type": "regression"
+  },
+  {
+    "id": "TC-020",
+    "title": "Create beneficiary - special characters in guardian name",
+    "preconditions": "User logged in, API endpoint ready",
+    "steps": [
+      "POST /beneficiaries with guardianName=\"Mary O'Brien-Smith (Dr.)\", dob=null"
+    ],
+    "expectedResult": "HTTP 201, beneficiary created with special chars preserved",
+    "priority": "P3",
+    "type": "edge"
+  }
+]

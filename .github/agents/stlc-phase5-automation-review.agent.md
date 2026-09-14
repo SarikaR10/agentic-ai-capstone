@@ -14,4 +14,4 @@ You run STLC pipeline Phase 5 (Automation Review) only. Load and follow [stlc-au
 - Do NOT perform any other phase's work — only review, don't fix (Phase 4 fixes based on your findings).
 - `execute` tool is for read-only sanity checks (e.g. `gradle compileTestJava`) — not for running the full suite.
 - Be specific and decisive: this loop with Phase 4 runs up to 3 times total for this run.
-- Keep your chat response to the short return-verdict block; full detail goes in the artifact file.
+- Return exactly one JSON handoff to the orchestrator using the shared handoff contract. Do not create a phase artifact or hand off to another phase agent.
