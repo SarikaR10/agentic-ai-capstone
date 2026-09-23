@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-09-23T15:13:21.075Z",
+  "trigger": {
+    "thresholdRatio": 0.6,
+    "thresholdTokens": 30000,
+    "cumulativeTokens": 319403
+  },
+  "run": {
+    "runId": "EPMCDMETST-66225-20260923-195716",
+    "workflowType": null,
+    "currentPhase": null,
+    "status": "blocked",
+    "retryCounts": {},
+    "retryLimits": {}
+  },
+  "completedPhases": [],
+  "artifacts": [
+    "stlc/EPMCDMETST-66225-20260923-195716/ph0_classification.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph1_jira.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph2_test_plan.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph3_test_cases.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph4_test_case_review.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph4_upload_jira.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph6_automation_review.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph7_execution.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph8_report.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph9_pr.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph10_jira_close.json",
+    "package.json",
+    "package-lock.json",
+    "playwright.config.ts",
+    "playwright/tests/cart.spec.ts"
+  ],
+  "latestTokenEntries": [
+    {
+      "ts": "2026-09-23T14:31:56.811Z",
+      "phase": null,
+      "sessionId": "8c973ba5-1e53-479e-ba81-92f64c2f4ead",
+      "estTokens": 141512,
+      "cumulativeTotal": 141512
+    },
+    {
+      "ts": "2026-09-23T15:13:20.319Z",
+      "phase": null,
+      "sessionId": "8c973ba5-1e53-479e-ba81-92f64c2f4ead",
+      "estimatedPhaseTokens": 177891,
+      "tokenSource": "transcript_chars_div_4",
+      "cumulativeTotal": 319403
+    }
+  ],
+  "nextAction": "Read this summary and the current phase input artifacts before continuing."
+}

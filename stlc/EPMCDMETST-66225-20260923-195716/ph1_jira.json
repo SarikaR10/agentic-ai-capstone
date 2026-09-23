@@ -1,0 +1,17 @@
+{
+  "phase": "read-jira",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "story": {
+      "key": "EPMCDMETST-66225",
+      "summary": "Add a product to cart successfully",
+      "description": "*As a* shopper\n\n*I want to* add a product from the inventory page to my cart\n\n*So that* I can purchase it later. Based on the inventory page showing products such as \"Sauce Labs Backpack\", \"Bike Light\", and others. [Swag Labs|https://www.saucedemo.com/inventory.html]\nh1. Acceptance Criteria\n # User can view available products on the inventory page. [Swag Labs|https://www.saucedemo.com/inventory.html]\n # User can click *Add to Cart* for a product.\n # Cart badge count increases by 1.\n # Selected product appears in the cart.\n # Product name and price match inventory details.\n # User can remove the product from the cart.\n # Cart badge updates accordingly.",
+      "issueType": "Story"
+    },
+    "artifact_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph1_jira.json"
+  },
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-66225-20260923-195716/ph1_jira.json"],
+  "next_recommendation": "Create the proportional test plan from the Jira story."
+}

@@ -1,0 +1,232 @@
+{
+  "run_id": "EPMCDMETST-66225-20260923-195716",
+  "story_id": "EPMCDMETST-66225",
+  "workflow_type": "story",
+  "current_phase": "automation-execution",
+  "status": "blocked",
+  "phase_history": [
+    {
+      "phase_name": "test-classification",
+      "start_time": "2026-09-23T19:57:16Z",
+      "end_time": "2026-09-23T19:57:16Z",
+      "duration_ms": 0,
+      "input_ref": "story_id:EPMCDMETST-66225; workflow_type:story",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph0_classification.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Story workflow explicitly selected by user."
+    },
+    {
+      "phase_name": "read-jira",
+      "start_time": "2026-09-23T19:57:16Z",
+      "end_time": "2026-09-23T19:57:16Z",
+      "duration_ms": 0,
+      "input_ref": "story_id:EPMCDMETST-66225",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph1_jira.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Retrieved through scripts/read_jira.py."
+    },
+    {
+      "phase_name": "test-plan",
+      "start_time": "2026-09-23T19:58:00Z",
+      "end_time": "2026-09-23T19:58:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph1_jira.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph2_test_plan.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Plan covers all acceptance criteria and required test types."
+    },
+    {
+      "phase_name": "test-case-generation",
+      "start_time": "2026-09-23T19:58:00Z",
+      "end_time": "2026-09-23T19:58:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph2_test_plan.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph3_test_cases.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Three manual cases generated: positive, negative, and edge."
+    },
+    {
+      "phase_name": "test-case-review",
+      "start_time": "2026-09-23T19:58:00Z",
+      "end_time": "2026-09-23T19:58:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph3_test_cases.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph4_test_case_review.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "All acceptance criteria are traceable."
+    },
+    {
+      "phase_name": "upload-jira",
+      "start_time": "2026-09-23T19:59:00Z",
+      "end_time": "2026-09-23T19:59:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/approved_testcases.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph4_upload_jira.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Created, linked, and transitioned EPMCDMETST-66226 through EPMCDMETST-66228."
+    },
+    {
+      "phase_name": "automation-generation",
+      "start_time": "2026-09-23T20:00:00Z",
+      "end_time": "2026-09-23T20:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph4_test_case_review.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Generated focused Selenium/Cucumber automation; compileTestJava passed."
+    },
+    {
+      "phase_name": "automation-review",
+      "start_time": "2026-09-23T20:00:00Z",
+      "end_time": "2026-09-23T20:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph6_automation_review.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Traceability and compile validation passed."
+    },
+    {
+      "phase_name": "automation-execution",
+      "start_time": "2026-09-23T20:00:00Z",
+      "end_time": "2026-09-23T20:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph7_execution.json",
+      "status": "SKIPPED",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Blocked: configured Playwright MCP tool is unavailable in this session."
+    },
+    {
+      "phase_name": "report-generation",
+      "start_time": "2026-09-23T20:00:00Z",
+      "end_time": "2026-09-23T20:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph7_execution.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph8_report.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "Report records incomplete execution and residual risk."
+    },
+    {
+      "phase_name": "pr-creation",
+      "start_time": "2026-09-23T20:00:00Z",
+      "end_time": "2026-09-23T20:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph8_report.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph9_pr.json",
+      "status": "SKIPPED",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "No commit, push, or PR created."
+    },
+    {
+      "phase_name": "jira-close",
+      "start_time": "2026-09-23T20:00:00Z",
+      "end_time": "2026-09-23T20:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph9_pr.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph10_jira_close.json",
+      "status": "SKIPPED",
+      "retry_count": 0,
+      "token_usage": {"prompt": 0, "completion": 0, "total": 0},
+      "notes": "No PR link exists."
+    },
+    {
+      "phase_name": "automation-generation",
+      "start_time": "2026-09-23T20:12:00Z",
+      "end_time": "2026-09-23T20:12:03Z",
+      "duration_ms": 3000,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph4_test_case_review.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+      "status": "PASS",
+      "retry_count": 1,
+      "token_usage": {"prompt": 1200, "completion": 1100, "total": 2300, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Regenerated the noncompliant Selenium/Cucumber deliverable as Playwright Test UI automation; discovery validated three tests."
+    },
+    {
+      "phase_name": "automation-review",
+      "start_time": "2026-09-23T20:12:03Z",
+      "end_time": "2026-09-23T20:12:05Z",
+      "duration_ms": 2000,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph6_automation_review.json",
+      "status": "PASS",
+      "retry_count": 1,
+      "token_usage": {"prompt": 700, "completion": 500, "total": 1200, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Playwright Test contract, traceability, stable selectors, web-first assertions, and test discovery reviewed."
+    },
+    {
+      "phase_name": "automation-execution",
+      "start_time": "2026-09-23T20:12:05Z",
+      "end_time": "2026-09-23T20:12:05Z",
+      "duration_ms": 0,
+      "input_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+      "output_json": "stlc/EPMCDMETST-66225-20260923-195716/ph7_execution.json",
+      "status": "FAIL",
+      "retry_count": 1,
+      "token_usage": {"prompt": 450, "completion": 250, "total": 700, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Blocked: the configured playwright MCP server is declared in .vscode/mcp.json but no callable MCP browser tool is exposed in this session."
+    }
+  ],
+  "artifacts": [
+    "stlc/EPMCDMETST-66225-20260923-195716/ph0_classification.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph1_jira.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph2_test_plan.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph3_test_cases.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph4_test_case_review.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph4_upload_jira.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph5_automation_manifest.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph6_automation_review.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph7_execution.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph8_report.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph9_pr.json",
+    "stlc/EPMCDMETST-66225-20260923-195716/ph10_jira_close.json",
+    "package.json",
+    "package-lock.json",
+    "playwright.config.ts",
+    "playwright/tests/cart.spec.ts"
+  ],
+  "pr_link": null,
+  "observability": [
+    {"event": "PHASE_START", "phase": "test-classification", "status": "in_progress", "retry_count": 0},
+    {"event": "PHASE_END", "phase": "test-classification", "status": "PASS", "retry_count": 0},
+    {"event": "PHASE_START", "phase": "read-jira", "status": "in_progress", "retry_count": 0},
+    {"event": "PHASE_END", "phase": "read-jira", "status": "PASS", "retry_count": 0},
+    {"event": "DECISION", "phase": "read-jira", "status": "PASS", "next_phase": "test-plan"}
+    ,{"event": "PHASE_END", "phase": "test-plan", "status": "PASS", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "test-case-generation", "status": "PASS", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "test-case-review", "status": "PASS", "retry_count": 0}
+    ,{"event": "DECISION", "phase": "test-case-review", "status": "PASS", "next_phase": "upload-jira"}
+    ,{"event": "PHASE_END", "phase": "upload-jira", "status": "PASS", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "automation-generation", "status": "PASS", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "automation-review", "status": "PASS", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "automation-execution", "status": "SKIPPED", "retry_count": 0, "error_code": "PLAYWRIGHT_MCP_UNAVAILABLE"}
+    ,{"event": "PHASE_END", "phase": "report-generation", "status": "PASS", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "pr-creation", "status": "SKIPPED", "retry_count": 0}
+    ,{"event": "PHASE_END", "phase": "jira-close", "status": "SKIPPED", "retry_count": 0}
+    ,{"event": "DECISION", "phase": "automation-execution", "status": "SKIPPED", "next_phase": "automation-generation", "reason": "Existing artifact violated the Playwright contract"}
+    ,{"event": "PHASE_START", "phase": "automation-generation", "status": "in_progress", "retry_count": 1, "timestamp": "2026-09-23T20:12:00Z"}
+    ,{"event": "PHASE_END", "phase": "automation-generation", "status": "PASS", "retry_count": 1, "duration_ms": 3000, "token_used_estimate": 2300, "outputs_digest": "ph5-playwright"}
+    ,{"event": "PHASE_END", "phase": "automation-review", "status": "PASS", "retry_count": 1, "duration_ms": 2000, "token_used_estimate": 1200, "outputs_digest": "ph6-playwright-pass"}
+    ,{"event": "PHASE_END", "phase": "automation-execution", "status": "FAIL", "retry_count": 1, "duration_ms": 0, "error_code": "PLAYWRIGHT_MCP_UNAVAILABLE", "token_used_estimate": 700}
+    ,{"event": "DECISION", "phase": "automation-execution", "status": "FAIL", "next_phase": "automation-execution", "reason": "Resume when the configured Playwright MCP server is callable"}
+  ]
+}

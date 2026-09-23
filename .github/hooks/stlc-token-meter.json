@@ -5,6 +5,11 @@
         "type": "command",
         "command": "node .github/hooks/scripts/token-meter.js",
         "timeout": 10
+      },
+      {
+        "type": "command",
+        "command": "node .github/hooks/scripts/context-summary.js",
+        "timeout": 10
       }
     ]
   }

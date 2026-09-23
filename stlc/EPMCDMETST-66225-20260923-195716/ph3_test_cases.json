@@ -1,0 +1,55 @@
+{
+  "phase": "test-case-generation",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "test_cases": [
+      {
+        "id": "EPMCDMETST-66225-TC-001",
+        "title": "Add one inventory product and remove it from the cart",
+        "type": ["functional", "smoke", "regression"],
+        "priority": "High",
+        "preconditions": ["Shopper is logged in and on the inventory page.", "At least one product is visible."],
+        "steps": [
+          "Record the name and price of Sauce Labs Backpack on the inventory page.",
+          "Click Add to Cart for Sauce Labs Backpack.",
+          "Open the cart.",
+          "Compare the cart item name and price with the recorded inventory values.",
+          "Remove the product from the cart."
+        ],
+        "expected_result": "The cart badge increases to 1 after adding; the selected product appears with the same name and price; after removal the cart badge is no longer shown or is 0 and the cart is empty.",
+        "acceptance_criteria": [1, 2, 3, 4, 5, 6, 7]
+      },
+      {
+        "id": "EPMCDMETST-66225-TC-002",
+        "title": "Cart remains unchanged when no product is added",
+        "type": ["negative", "functional"],
+        "priority": "Medium",
+        "preconditions": ["Shopper is logged in and on the inventory page.", "Cart is empty."],
+        "steps": ["Do not click Add to Cart for any product.", "Open the cart."],
+        "expected_result": "No cart badge is displayed or its count remains 0, and the cart contains no product.",
+        "acceptance_criteria": [3, 4, 7]
+      },
+      {
+        "id": "EPMCDMETST-66225-TC-003",
+        "title": "Add two different products and verify independent cart entries",
+        "type": ["edge", "functional", "regression"],
+        "priority": "Medium",
+        "preconditions": ["Shopper is logged in and on the inventory page.", "Cart is empty."],
+        "steps": [
+          "Record the names and prices of Sauce Labs Backpack and Bike Light.",
+          "Add both products to the cart.",
+          "Open the cart.",
+          "Compare both item names and prices with the inventory values.",
+          "Remove one product and observe the cart badge and remaining item."
+        ],
+        "expected_result": "The cart badge reaches 2; both products appear with matching names and prices; removing one product reduces the badge to 1 and leaves the other product intact.",
+        "acceptance_criteria": [1, 2, 3, 4, 5, 6, 7]
+      }
+    ],
+    "artifact_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph3_test_cases.json"
+  },
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-66225-20260923-195716/ph3_test_cases.json"],
+  "next_recommendation": "Review test cases for coverage and traceability before Jira upload."
+}

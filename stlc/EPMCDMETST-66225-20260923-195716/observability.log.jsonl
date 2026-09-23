@@ -1,0 +1,5 @@
+{"event":"PHASE_START","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"test-classification","status":"in_progress","retry_count":0,"token_budget":3000}
+{"event":"PHASE_END","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"test-classification","status":"PASS","retry_count":0}
+{"event":"PHASE_START","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"read-jira","status":"in_progress","retry_count":0}
+{"event":"PHASE_END","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"read-jira","status":"PASS","retry_count":0}
+{"event":"DECISION","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"read-jira","status":"PASS","next_phase":"test-plan"}

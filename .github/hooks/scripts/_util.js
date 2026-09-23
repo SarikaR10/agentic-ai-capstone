@@ -77,4 +77,21 @@ function detectPhaseNumber(input) {
   return null;
 }
 
-module.exports = { readStdin, stlcRoot, findLatestRunDir, readJsonSafe, writeJson, appendLine, output, detectPhaseNumber };
+function detectPhaseIdentifier(input) {
+  const text = JSON.stringify(input).toLowerCase();
+  const phases = [
+    'test-classification', 'read-jira', 'test-plan', 'test-case-generation',
+    'test-case-review', 'upload-jira', 'automation-generation',
+    'automation-review', 'automation-execution', 'self-heal',
+    'report-generation', 'pr-creation', 'jira-close'
+  ];
+  return phases.find((phase) => text.includes(phase)) || null;
+}
+
+function detectVerdict(input) {
+  const text = JSON.stringify(input);
+  const match = text.match(/verdict\s*:\s*(PASS|REJECT|OPEN_FIXES|DONE|FAIL)/i);
+  return match ? match[1].toUpperCase() : null;
+}
+
+module.exports = { readStdin, stlcRoot, findLatestRunDir, readJsonSafe, writeJson, appendLine, output, detectPhaseNumber, detectPhaseIdentifier, detectVerdict };

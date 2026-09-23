@@ -1,36 +1,11 @@
 ---
 name: stlc-test-case-review
-description: 'STLC pipeline Phase 3 — review test cases for coverage and quality, produce a PASS/REJECT verdict. Use when running the STLC pipeline Phase 3 / Test Case Review step.'
+description: "Review generated software test cases for coverage, traceability, quality, and required test types. Use after a test-case generator completes, with artifact references supplied by the workflow coordinator."
 ---
+# Test Case Review
 
-# STLC Phase 3 — Test Case Review
+Read the coordinator-supplied conventions and references for classification, the test plan, and the test-case artifacts. Verify every in-scope requirement is covered, positive/negative/edge behavior is represented, required test types are explicit, IDs are unique, and expected results are observable and unambiguous.
 
-See [shared conventions](../_shared/stlc-conventions.md) for run-id, directory layout, and the return-verdict contract — read it first.
+Write the review to the coordinator-supplied output reference. Return `PASS` when the cases are ready for the next configured phase; return `REJECT` only for material gaps and list actionable fixes for the test-case generator. The coordinator owns retry limits and any lessons repository.
 
-## When to Use
-Invoked by `stlc-phase3-test-case-review` agent after Phase 2 (and after every Phase 2 rerun, up to 3 total attempts).
-
-## Input
-- `stlc/<run-id>/ph2_test_cases.md` + `.json`
-- `stlc/<run-id>/ph1_test_plan.md`, `ph0_classification.json`
-
-## Procedure
-1. Check coverage against the test plan's in-scope features and the classification's test types — flag missing negative/edge/regression cases.
-2. Check quality: clear steps, unambiguous expected results, correct priority, no duplicate IDs.
-3. Decide **PASS** (cases are good enough to automate) or **REJECT** (material gaps) — do not nitpick minor wording into a REJECT.
-4. Write `stlc/<run-id>/ph3_test_case_review.md` listing specific, actionable issues (if REJECT) or a brief coverage confirmation (if PASS).
-5. If REJECT, append a one-line entry to `stlc/knowledge/lessons.md` per shared conventions describing the recurring gap.
-
-## Output Template (`ph3_test_case_review.md`)
-```markdown
-# Test Case Review — <ticketKey>
-
-## Verdict: PASS | REJECT
-
-## Coverage Check
-## Issues (if REJECT — numbered, actionable)
-## Notes
-```
-
-## Output Format
-End with the return-verdict block: `VERDICT: PASS` or `VERDICT: REJECT` (plus a one-line reason) per shared conventions.
+Return the standard phase envelope with `status` set to `PASS` or `FAIL`; put `REJECT` in `outputs.verdict`, include the output artifact reference in `artifacts`, and list actionable findings in `errors` when applicable.

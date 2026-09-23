@@ -1,0 +1,9 @@
+{
+  "phase": "upload-jira",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {"created_test_cases": ["EPMCDMETST-66226", "EPMCDMETST-66227", "EPMCDMETST-66228"], "linked_to": "EPMCDMETST-66225", "parent_transition": "In Progress", "artifact_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph4_upload_jira.json"},
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-66225-20260923-195716/ph4_upload_jira.json"],
+  "next_recommendation": "Generate and review automation."
+}

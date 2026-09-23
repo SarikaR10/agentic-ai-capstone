@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Add one inventory product and remove it from the cart",
+    "priority": "High",
+    "steps": [
+      "Record the name and price of Sauce Labs Backpack on the inventory page.",
+      "Click Add to Cart for Sauce Labs Backpack.",
+      "Open the cart.",
+      "Compare the cart item name and price with the recorded inventory values.",
+      "Remove the product from the cart."
+    ],
+    "expected_result": "The cart badge increases to 1 after adding; the selected product appears with the same name and price; after removal the cart badge is no longer shown or is 0 and the cart is empty."
+  },
+  {
+    "title": "Cart remains unchanged when no product is added",
+    "priority": "Medium",
+    "steps": ["Do not click Add to Cart for any product.", "Open the cart."],
+    "expected_result": "No cart badge is displayed or its count remains 0, and the cart contains no product."
+  },
+  {
+    "title": "Add two different products and verify independent cart entries",
+    "priority": "Medium",
+    "steps": [
+      "Record the names and prices of Sauce Labs Backpack and Bike Light.",
+      "Add both products to the cart.",
+      "Open the cart.",
+      "Compare both item names and prices with the inventory values.",
+      "Remove one product and observe the cart badge and remaining item."
+    ],
+    "expected_result": "The cart badge reaches 2; both products appear with matching names and prices; removing one product reduces the badge to 1 and leaves the other product intact."
+  }
+]
