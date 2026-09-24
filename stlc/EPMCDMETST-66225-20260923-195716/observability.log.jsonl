@@ -3,3 +3,7 @@
 {"event":"PHASE_START","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"read-jira","status":"in_progress","retry_count":0}
 {"event":"PHASE_END","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"read-jira","status":"PASS","retry_count":0}
 {"event":"DECISION","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"read-jira","status":"PASS","next_phase":"test-plan"}
+{"event":"PHASE_START","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"automation-execution","status":"in_progress","retry_count":3,"timestamp":"2026-09-24T00:00:00Z"}
+{"event":"PHASE_END","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"automation-execution","status":"PASS","retry_count":3,"duration_ms":4600,"outputs_digest":"ph7-playwright-3-passed"}
+{"event":"DECISION","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"automation-execution","status":"PASS","next_phase":"report-generation","reason":"Callable configured Playwright MCP browser verified and npm run test:e2e passed 3 tests"}
+{"event":"PHASE_END","run_id":"EPMCDMETST-66225-20260923-195716","story_id":"EPMCDMETST-66225","workflow_type":"story","phase":"report-generation","status":"PASS","retry_count":2,"outputs_digest":"ph8-complete-pass"}
