@@ -1,0 +1,6 @@
+{
+  "key": "EPMCDMETST-67336",
+  "summary": "Remove Product from Cart",
+  "description": "As a customer,\r\n\r\nI want to remove an item from my shopping cart,\r\n\r\nSo that I can update my purchase before checkout.\r\nh1. Business Requirement\r\n\r\nCustomers should be able to remove previously added products from their shopping cart and see the cart updated immediately.\r\n----\r\nh1. Description\r\n\r\nThe application shall allow users to remove products from the cart from both the Inventory page and Cart page.\r\n\r\nThe cart badge, cart contents, and product actions shall be updated accordingly.\r\n----\r\nh1. Preconditions\r\n * User is logged in.\r\n * At least one product exists in the shopping cart.\r\n * User is on the Inventory or Cart page.",
+  "issueType": "Story"
+}

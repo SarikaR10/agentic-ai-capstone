@@ -1,0 +1,92 @@
+{
+  "phase": "test-case-generation",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "test_cases": [
+      {
+        "id": "EPMCDMETST-67336-TC-001",
+        "title": "Remove a product from the cart on the Cart page",
+        "type": ["functional", "smoke", "positive end-to-end", "UI"],
+        "priority": "High",
+        "preconditions": [
+          "User is logged in.",
+          "The cart contains at least one product."
+        ],
+        "steps": [
+          "Log in to the application.",
+          "Add a product to the cart.",
+          "Open the cart page.",
+          "Select the Remove action for the cart item.",
+          "Observe the cart immediately after removal."
+        ],
+        "expected_result": "The selected product is removed from the cart, the cart badge count updates, and the cart contents are refreshed without leaving stale entries behind.",
+        "traceability": {
+          "test_plan_coverage": ["TP-01"],
+          "story_requirements": [
+            "Customers should be able to remove previously added products from their shopping cart.",
+            "The cart badge, cart contents, and product actions shall be updated accordingly."
+          ]
+        }
+      },
+      {
+        "id": "EPMCDMETST-67336-TC-002",
+        "title": "Remove a product from the Inventory page",
+        "type": ["functional", "smoke", "positive end-to-end", "UI"],
+        "priority": "High",
+        "preconditions": [
+          "User is logged in.",
+          "The cart contains at least one product."
+        ],
+        "steps": [
+          "Log in and navigate to the Inventory page.",
+          "Add a product to the cart.",
+          "Use the Remove action on the product card or cart entry from the Inventory view.",
+          "Navigate to the cart and confirm the product is no longer listed."
+        ],
+        "expected_result": "The product is removed from the cart from the Inventory page and the cart badge, cart contents, and actions reflect the new state immediately.",
+        "traceability": {
+          "test_plan_coverage": ["TP-02"],
+          "story_requirements": [
+            "The application shall allow users to remove products from the cart from both the Inventory page and Cart page.",
+            "The cart badge, cart contents, and product actions shall be updated accordingly."
+          ]
+        }
+      },
+      {
+        "id": "EPMCDMETST-67336-TC-003",
+        "title": "Remove one of multiple cart entries without affecting the others",
+        "type": ["functional", "edge/data consistency", "UI"],
+        "priority": "Medium",
+        "preconditions": [
+          "User is logged in.",
+          "The cart contains multiple products."
+        ],
+        "steps": [
+          "Log in and add two products to the cart.",
+          "Open the cart.",
+          "Remove one product while leaving the other in the cart.",
+          "Inspect the remaining product and the product count."
+        ],
+        "expected_result": "Only the selected product is removed; the remaining item stays in the cart and the badge count reflects the correct reduced total.",
+        "traceability": {
+          "test_plan_coverage": ["TP-03"],
+          "story_requirements": [
+            "Customers should be able to remove previously added products from their shopping cart.",
+            "The cart badge and cart contents shall remain consistent after a partial removal."
+          ]
+        }
+      }
+    ],
+    "artifact_refs": [
+      "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.json",
+      "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.md"
+    ]
+  },
+  "errors": [],
+  "artifacts": [
+    "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.md"
+  ],
+  "next_recommendation": "Review the generated test cases for coverage and traceability before Jira upload."
+}

@@ -1,0 +1,38 @@
+{
+  "phase": "test-classification",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "workflow_type": "story",
+    "start_phase": "read-jira",
+    "selected_phases": [
+      "test-classification",
+      "read-jira",
+      "test-plan",
+      "test-case-generation",
+      "test-case-review",
+      "upload-jira",
+      "automation-generation",
+      "automation-review",
+      "automation-execution",
+      "report-generation",
+      "pr-creation",
+      "jira-close"
+    ],
+    "artifact_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph0_classification.json",
+    "rationale": "The issue is a Story and the workflow explicitly targets the full Story pipeline.",
+    "required_inputs": [
+      "story_id",
+      "jira_story_json",
+      "project_adapter_context"
+    ],
+    "assumptions": [
+      "Jira is the configured issue tracker.",
+      "The project read_jira.py integration is the available story retrieval path."
+    ],
+    "blockers": []
+  },
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-67336-20261001-130000/ph0_classification.json"],
+  "next_recommendation": "Persist the Jira response and continue to test planning."
+}

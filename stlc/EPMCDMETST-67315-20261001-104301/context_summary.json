@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T06:46:48.783Z",
+  "trigger": {
+    "thresholdRatio": 0.6,
+    "thresholdTokens": 30000,
+    "cumulativeTokens": null,
+    "thresholdReached": false,
+    "forcedRebuild": true
+  },
+  "run": {
+    "runId": "EPMCDMETST-67315-20261001-104301",
+    "workflowType": "story",
+    "currentPhase": "jira-report-comment-and-close",
+    "status": "BLOCKED",
+    "blocker": "Final Jira comment/closure was not performed: no configured Jira close/report script is present, and the linked test cases remain In Progress after environment-blocked execution. Story closure requires all linked test cases to be verified Closed.",
+    "activePhase": null,
+    "reviewWaivers": [
+      {
+        "finding": "Separately displayed inventory product count is not asserted by automation; repository evidence contains no corresponding UI element.",
+        "authorized_by": "User",
+        "authorization": "skip this for now and proceed further",
+        "scope": "Proceed to automation execution only; preserve as residual risk and do not alter approved Jira test cases."
+      }
+    ],
+    "jiraTestCases": [
+      "EPMCDMETST-67316",
+      "EPMCDMETST-67317",
+      "EPMCDMETST-67318"
+    ],
+    "prLink": null
+  },
+  "phases": [
+    {
+      "phase": "read-jira",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph1_jira.json",
+      "startTime": "2026-10-01T10:43:01+05:30",
+      "endTime": "2026-10-01T10:43:01+05:30",
+      "tokenEstimate": 0,
+      "tokenEstimateSource": "script execution"
+    },
+    {
+      "phase": "test-classification",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph0_classification.json",
+      "startTime": "2026-10-01T10:43:01+05:30",
+      "endTime": "2026-10-01T10:44:31+05:30",
+      "tokenEstimate": 1500,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "test-plan",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph2_test_plan.json",
+      "startTime": "2026-10-01T10:44:31+05:30",
+      "endTime": "2026-10-01T10:46:25+05:30",
+      "tokenEstimate": 1800,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "test-case-generation",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.json",
+      "startTime": "2026-10-01T10:46:25+05:30",
+      "endTime": "2026-10-01T10:47:50+05:30",
+      "tokenEstimate": 1800,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "test-case-review",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph4_test_case_review.json",
+      "startTime": "2026-10-01T10:47:50+05:30",
+      "endTime": "2026-10-01T10:49:11+05:30",
+      "tokenEstimate": 1000,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "jira-upload",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph4_upload_jira.json",
+      "startTime": "2026-10-01T10:50:10+05:30",
+      "endTime": "2026-10-01T10:51:11+05:30",
+      "tokenEstimate": 0,
+      "tokenEstimateSource": "script execution"
+    },
+    {
+      "phase": "automation-generation",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph5_automation_manifest.json",
+      "startTime": "2026-10-01T10:51:44+05:30",
+      "endTime": "2026-10-01T10:55:06+05:30",
+      "tokenEstimate": 4500,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "automation-review",
+      "status": "FAIL",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph6_automation_review.json",
+      "startTime": "2026-10-01T10:55:06+05:30",
+      "endTime": "2026-10-01T10:57:24+05:30",
+      "tokenEstimate": 1200,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "automation-generation",
+      "status": "PASS",
+      "retryCount": 1,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph5_automation_manifest.json",
+      "startTime": "2026-10-01T10:57:24+05:30",
+      "endTime": "2026-10-01T10:59:18+05:30",
+      "tokenEstimate": 2200,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "automation-review",
+      "status": "FAIL",
+      "retryCount": 1,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph6_automation_review.json",
+      "startTime": "2026-10-01T10:59:18+05:30",
+      "endTime": "2026-10-01T11:01:51+05:30",
+      "tokenEstimate": 1400,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "automation-generation",
+      "status": "PASS",
+      "retryCount": 2,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph5_automation_manifest.json",
+      "startTime": "2026-10-01T11:01:51+05:30",
+      "endTime": "2026-10-01T11:03:20+05:30",
+      "tokenEstimate": 1500,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "automation-review",
+      "status": "FAIL",
+      "retryCount": 2,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph6_automation_review.json",
+      "startTime": "2026-10-01T11:03:20+05:30",
+      "endTime": "2026-10-01T11:05:42+05:30",
+      "tokenEstimate": 900,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "automation-execution",
+      "status": "FAIL",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph7_execution.json",
+      "startTime": "2026-10-01T11:08:03+05:30",
+      "endTime": "2026-10-01T11:10:12+05:30",
+      "tokenEstimate": 900,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "report-generation",
+      "status": "PASS",
+      "retryCount": 0,
+      "outputRef": "stlc/EPMCDMETST-67315-20261001-104301/ph8_report.json",
+      "startTime": "2026-10-01T11:10:12+05:30",
+      "endTime": "2026-10-01T11:12:39+05:30",
+      "tokenEstimate": 1600,
+      "tokenEstimateSource": "chars/4 workflow estimate"
+    },
+    {
+      "phase": "pr-creation",
+      "status": "SKIPPED",
+      "retryCount": 0,
+      "outputRef": null,
+      "startTime": "2026-10-01T11:12:39+05:30",
+      "endTime": "2026-10-01T11:12:39+05:30",
+      "tokenEstimate": 0,
+      "tokenEstimateSource": "not run"
+    },
+    {
+      "phase": "jira-report-comment-and-close",
+      "status": "SKIPPED",
+      "retryCount": 0,
+      "outputRef": null,
+      "startTime": "2026-10-01T11:12:39+05:30",
+      "endTime": "2026-10-01T11:12:39+05:30",
+      "tokenEstimate": 0,
+      "tokenEstimateSource": "not run"
+    }
+  ],
+  "artifacts": [
+    "stlc/EPMCDMETST-67315-20261001-104301/ph1_jira.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph0_classification.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph2_test_plan.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.md",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph4_test_case_review.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/approved_testcases.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph4_upload_jira.json",
+    "playwright/tests/inventory-network.spec.ts",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph5_automation_manifest.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph6_automation_review.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph7_execution.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph8_report.json",
+    "test-results/",
+    "playwright-report/index.html",
+    "stlc/EPMCDMETST-67315-20261001-104301/observability.log.jsonl"
+  ],
+  "tokenUsage": {
+    "method": "Per-subagent transcript growth divided by four; estimate only, not billed usage.",
+    "cumulativeEstimatedTokens": null,
+    "confidence": "unavailable_legacy_only",
+    "estimatedIntervals": 0,
+    "unavailableIntervals": 0,
+    "legacyEntriesIgnored": 11,
+    "phaseEstimates": [
+      {
+        "phase": "read-jira",
+        "estimatedTokens": 0,
+        "source": "script execution"
+      },
+      {
+        "phase": "test-classification",
+        "estimatedTokens": 1500,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "test-plan",
+        "estimatedTokens": 1800,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "test-case-generation",
+        "estimatedTokens": 1800,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "test-case-review",
+        "estimatedTokens": 1000,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "jira-upload",
+        "estimatedTokens": 0,
+        "source": "script execution"
+      },
+      {
+        "phase": "automation-generation",
+        "estimatedTokens": 4500,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "automation-review",
+        "estimatedTokens": 1200,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "automation-generation",
+        "estimatedTokens": 2200,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "automation-review",
+        "estimatedTokens": 1400,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "automation-generation",
+        "estimatedTokens": 1500,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "automation-review",
+        "estimatedTokens": 900,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "automation-execution",
+        "estimatedTokens": 900,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "report-generation",
+        "estimatedTokens": 1600,
+        "source": "chars/4 workflow estimate"
+      },
+      {
+        "phase": "pr-creation",
+        "estimatedTokens": 0,
+        "source": "not run"
+      },
+      {
+        "phase": "jira-report-comment-and-close",
+        "estimatedTokens": 0,
+        "source": "not run"
+      }
+    ],
+    "latestEntries": [
+      {
+        "ts": "2026-10-01T05:24:57.109Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:27:14.648Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:29:44.797Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:31:33.840Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:32:45.482Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:35:35.876Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:40:03.179Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      },
+      {
+        "ts": "2026-10-01T05:42:21.343Z",
+        "phase": null,
+        "phaseAttribution": null,
+        "estimatedIntervalTokens": null,
+        "tokenSource": "transcript_chars_div_4"
+      }
+    ]
+  },
+  "nextAction": "Resolve the recorded blocker before continuing: Final Jira comment/closure was not performed: no configured Jira close/report script is present, and the linked test cases remain In Progress after environment-blocked execution. Story closure requires all linked test cases to be verified Closed."
+}

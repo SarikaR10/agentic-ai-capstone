@@ -1,0 +1,48 @@
+{
+  "phase": "test-plan",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "scope": "Validate that a user can remove products from the cart from both the Inventory and Cart pages, and that the cart badge, entries, and available actions update immediately.",
+    "preconditions": [
+      "User is logged in.",
+      "At least one product exists in the shopping cart.",
+      "User is on the Inventory or Cart page."
+    ],
+    "approach": "Cover the story with positive and negative UI scenarios that verify the cart is updated immediately when an item is removed and that no stale cart state remains after removal.",
+    "coverage": [
+      {
+        "id": "TP-01",
+        "type": "positive end-to-end",
+        "ui": "Log in, add a product to the cart, navigate to the cart, remove the product, and verify the cart badge and cart contents update immediately.",
+        "traceability": [
+          "Customers should be able to remove previously added products from their shopping cart.",
+          "The cart badge, cart contents, and product actions shall be updated accordingly."
+        ]
+      },
+      {
+        "id": "TP-02",
+        "type": "positive end-to-end",
+        "ui": "Remove a product from the Inventory page, confirm the cart badge count decrements and the cart item is no longer present when the cart is opened.",
+        "traceability": [
+          "The application shall allow users to remove products from the cart from both the Inventory page and Cart page.",
+          "The cart badge, cart contents, and product actions shall be updated accordingly."
+        ]
+      },
+      {
+        "id": "TP-03",
+        "type": "edge/data consistency",
+        "ui": "Remove one item when multiple products are in the cart and verify that only the selected item is removed while the remaining product and badge count stay correct.",
+        "traceability": [
+          "Customers should be able to remove previously added products from their shopping cart.",
+          "The cart badge and cart contents shall remain consistent after a partial removal."
+        ]
+      }
+    ],
+    "test_types": ["functional", "positive end-to-end", "edge/data consistency", "UI"],
+    "automation_framework": "Playwright Test"
+  },
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-67336-20261001-130000/ph2_test_plan.json"],
+  "next_recommendation": "Generate manual test cases from this approved plan."
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "cursors": {
+    "38c756175252ca331628e6ebe91917cc2ea2e7d71a2fbe47a6eaa8c76442cd23": {
+      "sessionId": "fce8b830-80eb-4b3c-afd9-8adb74cde0e8",
+      "startChars": 316258,
+      "phase": "report-generation",
+      "phaseSource": "active_state",
+      "startedAt": "2026-10-01T08:56:06.695Z"
+    }
+  }
+}

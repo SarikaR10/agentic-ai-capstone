@@ -1,0 +1,17 @@
+{
+  "phase": "jira-upload",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "created_test_cases": [
+      {"key": "EPMCDMETST-67316", "status": "In Progress"},
+      {"key": "EPMCDMETST-67317", "status": "In Progress"},
+      {"key": "EPMCDMETST-67318", "status": "In Progress"}
+    ],
+    "linked_to_story": "EPMCDMETST-67315",
+    "parent_story_status": "In Progress"
+  },
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-67315-20261001-104301/approved_testcases.json"],
+  "next_recommendation": "Proceed to automation generation."
+}

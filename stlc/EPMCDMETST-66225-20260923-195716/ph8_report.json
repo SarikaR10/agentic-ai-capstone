@@ -9,8 +9,8 @@
     "execution_evidence": "npm run test:e2e completed with 3 passed in 4.6s against https://www.saucedemo.com through the configured Playwright MCP browser.",
     "environment_configuration_note": "Earlier login failures came from the prior configured environment credentials. The rerun used the documented SauceDemo demo credentials standard_user/secret_sauce and passed; this remains an environment configuration issue, not a product or automation failure.",
     "residual_risk": "No product or automation failure remains from the approved suite. The prior environment credential configuration should be corrected for repeatability.",
-    "pr_status": "SKIPPED: no explicit PR authorization or PR handoff artifact",
-    "jira_status": "SKIPPED: no PR link exists and Jira update is not authorized",
+    "pr_status": "SKIPPED per user request; no PR was created",
+    "jira_status": "CLOSED: execution report comment added; index.html attachment upload was blocked by the Jira gateway Cloudflare challenge",
     "artifact_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph8_report.json"
   },
   "errors": [],

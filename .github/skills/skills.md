@@ -36,6 +36,22 @@ Each entry defines:
 - worker: `STLC Skill Worker`
 - retry_owner: coordinator
 
+### Jira Upload and Verification
+
+- phase: `upload-jira`
+- skill: `stlc-jira-upload`
+- path: `.github/skills/stlc-jira-upload/SKILL.md`
+- creation script: `scripts/upload_jira.py`
+- required invocation: `python scripts/upload_jira.py --input <approved_testcases.json> --story <story-key>`
+- creation owner: orchestrator runs the repository script directly; do not delegate issue creation or substitute another Jira API path
+- scope: script creates Jira `Test` issues from approved test cases and links them to the parent Story; it does not create Jira Story-type issues
+- inputs: script execution summary and created issue keys, parent story ID, Jira auth adapter, live issue check rules
+- output: Jira upload verification artifact reference
+- worker: `STLC Skill Worker`
+- retry_owner: coordinator
+- worker scope: verification only; the worker must not create or relink Jira issues
+- required validation: read back each created key, confirm issuetype is `Test`, confirm the link to the parent story, and verify expected statuses before returning `PASS`
+
 ### Automation Review
 
 - phase: `automation-review`

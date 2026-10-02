@@ -1,0 +1,63 @@
+{
+  "run_id": "EPMCDMETST-67336-20261001-130000",
+  "story_id": "EPMCDMETST-67336",
+  "phase": "report-generation",
+  "status": "PASS",
+  "work_item": {
+    "summary": "Remove Product from Cart",
+    "type": "Story",
+    "jira_status": "In Progress",
+    "linked_test_cases": [
+      {"key": "EPMCDMETST-67337", "status": "In Progress"},
+      {"key": "EPMCDMETST-67338", "status": "In Progress"},
+      {"key": "EPMCDMETST-67339", "status": "In Progress"}
+    ],
+    "pull_request": "Not authorized; no PR was created."
+  },
+  "classification": {
+    "workflow_type": "story",
+    "status": "PASS",
+    "rationale": "The supplied Jira metadata identifies EPMCDMETST-67336 as a Story."
+  },
+  "test_plan": {
+    "status": "PASS",
+    "scope": "Validate product removal from both Inventory and Cart views and ensure cart badge and contents stay synchronized after removal.",
+    "scenarios": [
+      "Positive end-to-end cart removal flow",
+      "Inventory page removal flow",
+      "Partial removal when multiple entries are present"
+    ],
+    "framework": "Playwright Test"
+  },
+  "manual_test_cases": {
+    "count": 3,
+    "review_status": "PASS",
+    "cases": [
+      {"id": "EPMCDMETST-67336-TC-001", "title": "Remove a product from the cart on the Cart page"},
+      {"id": "EPMCDMETST-67336-TC-002", "title": "Remove a product from the Inventory page"},
+      {"id": "EPMCDMETST-67336-TC-003", "title": "Remove one of multiple cart entries without affecting the others"}
+    ]
+  },
+  "automation": {
+    "framework": "Playwright Test with TypeScript",
+    "mapped_approved_cases": 3,
+    "discovery": "The repo already contains cart-removal automation that matches all approved Story cases.",
+    "review": {
+      "status": "PASS",
+      "verdict": "APPROVED"
+    }
+  },
+  "execution": {
+    "status": "PASS",
+    "command": "PLAYWRIGHT_BASE_URL=https://www.saucedemo.com PLAYWRIGHT_USERNAME=standard_user PLAYWRIGHT_PASSWORD=secret_sauce npx playwright test playwright/tests/cart.spec.ts --project=chromium --reporter=line",
+    "passed": 3,
+    "failed": 0,
+    "zero_test_discovery": false,
+    "evidence": "3 tests passed (10.1s) against https://www.saucedemo.com using the configured Playwright browser environment.",
+    "interpretation": "The cart-removal feature is validated successfully in the live app for the approved scenarios."
+  },
+  "residual_risks": [
+    "Jira ticket closure and test-case closure were not performed in this run because no explicit close script or ticket transition workflow was available."
+  ],
+  "summary": "Three manual cases were generated and approved for the Story. The repo already includes matching Playwright automation for the cart-removal requirement, and the suite passed in the live app: 3 of 3 tests succeeded. The Story requirement is validated, though Jira close/transition actions remain outside the available script access in this session."
+}

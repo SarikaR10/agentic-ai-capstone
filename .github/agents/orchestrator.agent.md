@@ -77,9 +77,14 @@ Run only:
    - If FAIL: return to Test Case Agent
    - Retry loop max = **3**; after 3 failures, stop and request human action
 
-6. **Upload_jira.py** (SCRIPT)
-   - Upload approved test cases to JIRA
-   - Output: upload result JSON
+6. **Upload Jira test cases** (SCRIPT + verification skill)
+   - Use the repository's deterministic uploader only: `python scripts/upload_jira.py --input <approved_testcases.json> --story <story-key>`.
+   - Pass the approved test-case artifact as `--input` and the parent Jira Story key as `--story`; do not create these issues through an alternate agent, skill, or ad hoc Jira request.
+   - The script creates Jira `Test` issues and links them to the parent Story; it does not create Jira Story-type issues.
+   - Capture the created issue keys from the script output, then invoke the registered `stlc-jira-upload` skill strictly for live read-after-write verification.
+   - REQUIRED LIVE VERIFICATION: read each created issue and verify it exists, has issuetype `Test`, is linked to the supplied parent story, and is in the expected status. Verify the parent story's status only if the upload workflow requires its transition.
+   - If script execution fails, reports a failed create/link/transition, or any live verification fails, mark the phase `FAIL` and stop before continuing to automation.
+   - Output: script execution summary plus verified issue keys, issue types, parent links, and statuses
 
 7. **Automation Generation Agent** (AGENT)
    - Generate UI + API automation scripts
@@ -104,12 +109,16 @@ Run only:
    - Generate a one-page report as an artifact
    - Output: artifact path/link in JSON
 
-12. **Create PR** (SKILL)
+<!-- 12. **Create PR** (SKILL)
    - Commit changes and create PR
    - Output: PR URL + commit info in JSON
+   - This phase is intentionally skipped unless the user explicitly authorizes PR creation. -->
 
-13. **Add comment to JIRA and close JIRA ticket** (SCRIPT)
-   - Add PR link as comment and close ticket
+13. **Add report to JIRA and close JIRA ticket** (SCRIPT)
+   - Attach the final report artifact when no PR is created
+   - Add the report and execution summary as a comment, then close the ticket
+   - Before closing the story, retrieve every linked test case and transition any `In Progress` case to `Closed`
+   - Re-read all linked test cases and verify every one is `Closed`; do not close the story while any linked test case is not `Closed`
    - Output: JIRA update result JSON
 
 ## Phase Dependencies (Orchestrator Must Validate)
@@ -117,14 +126,17 @@ Run only:
 - Test Plan Agent requires: jira_story_json
 - Test Case Agent requires: test_plan_json
 - Test Review requires: test_cases_json
-- upload_jira.py requires: approved_test_cases_json
+- upload_jira.py requires: approved_test_cases_json + story_id + Jira credentials in the process environment
+- upload_jira.py invocation: `python scripts/upload_jira.py --input <approved_testcases.json> --story <story-key>`; this is the sole authorized creation path for Jira test cases
+- upload_jira.py PASS requires: live Jira read-back verification for each created issue and parent story linkage
 - Automation Generation requires: approved_test_cases_json + repo_context_ref
 - Automation Review requires: generated_code_ref + test_cases_json
 - Automation Execution requires: test_runner_config_ref + code_ref
 - Heal Agent requires: failing_logs_ref + code_ref
 - Publish Report requires: run summary + artifact refs
-- Create PR requires: git workspace + code_ref
-- JIRA comment/close requires: pr_link + story_id
+- Create PR requires: git workspace + code_ref + explicit user authorization
+- JIRA comment/close requires: story_id + final report artifact; include pr_link only when a PR was authorized and created
+- Story closure requires: all linked test cases verified as `Closed`; if any remain open or the verification is unavailable, stop before closing the story
 
 ## Skills Registry Requirement
 - The orchestrator MUST refer to an overall `skills.md` registry (consolidated skills list).
@@ -156,6 +168,7 @@ The worker invocation payload must contain:
 - Every agent/skill/script MUST return STRICT JSON only.
 - After each phase response, control returns to orchestrator.
 - Orchestrator validates JSON against the phase schema; if invalid, it must request a corrected JSON response.
+- A phase may not be marked `PASS` based only on local artifact generation or mock payloads. Any external action (Jira POST, issue linkage, close/transition) must be verified by re-reading the live external system before the phase is accepted as successful.
 
 Standard response envelope from any phase:
 ```json
@@ -191,6 +204,8 @@ Maintain a single run-scoped `state.json` with:
 Rules:
 - Persist after **every phase** (even failures).
 - On Resume: read `state.json`, detect last successful phase, and continue.
+- Keep the snake_case `phase_history` schema authoritative. Hooks must not create a parallel numeric `phases` schema or change orchestration status.
+- Hook updates are additive telemetry only: they may fill a missing token estimate on the matching active `phase_history` entry, but phase status, retry decisions, and `current_phase` remain orchestrator-owned.
 
 ## Observability (Per Phase)
 Emit a structured event log entry at:
@@ -202,10 +217,13 @@ Each event includes:
 - `inputs_digest` (hash/short) + `outputs_digest` (hash/short)
 Observability is written to:
 - `state.json` (summary) + optional `observability.log.jsonl` (full stream)
+- Token-meter hook rows use a versioned `schemaVersion: 2` and identify the phase attribution source. Old unversioned ledger rows are legacy snapshots and must not be mixed into corrected cumulative totals.
 
 ## Context + Summarization
-- The `SubagentStop` token hooks estimate cumulative usage from the phase transcript using the configured `chars/4` heuristic.
-- When cumulative usage reaches 60% of `stlc/config/token-budget.json:totalRunBudget`, the deterministic hook writes `<run-dir>/context_summary.json`.
+- `SubagentStart` records the transcript character count baseline. `SubagentStop` estimates only transcript growth since that baseline using `ceil(deltaChars / 4)`; it must not add repeated estimates of the whole transcript. If a start baseline or transcript is unavailable, record the interval as unavailable and do not invent a value.
+- Resolve the run from explicit hook `run_id`/`runId` when present, otherwise use the unique `IN_PROGRESS` run. If multiple runs are active, fail closed rather than attributing usage to the wrong run; if none is active, use the most recently updated state only for non-phase-specific context loading. Resolve phase from explicit phase metadata when available, otherwise from the active `phase_history` entry. Never infer a phase by scanning arbitrary transcript text. Record the attribution source; use `null` when it cannot be established.
+- The deterministic summary hook reads the current `state.json` fields (`run_id`, `workflow_type`, `current_phase`, `phase_history`, `artifacts`) and the corrected versioned ledger. It ignores legacy cumulative snapshot rows and reports their count. It also migrates/rebuilds old-schema or missing summaries.
+- When corrected cumulative usage reaches 60% of `stlc/config/token-budget.json:totalRunBudget`, the deterministic hook writes `<run-dir>/context_summary.json`. Once the threshold has been reached, refresh it when cumulative usage or the active phase changes. Before threshold, only create or rebuild it for first-time initialization or schema migration.
 - Before the next phase, read `context_summary.json` and the current phase inputs; use that artifact as the compact run context.
 - The hook cannot rewrite already-held conversation history. It provides deterministic compaction by replacing the context passed to subsequent phases with a stable artifact reference.
 - Fresh-context phases:
@@ -218,8 +236,9 @@ Observability is written to:
 - Orchestrator maintains per-phase token budgets:
   - e.g., Planning/Generation phases: higher budget
   - Review/Execution phases: smaller, focused budget
-- Orchestrator selects model per phase:
-  - “Reasoning/Planning” model for classification/plan/case design
-  - “Code generation” model for automation generation/heal
-  - “Fast/cheap” model for formatting, uploading, reporting
+- Use **GPT-4.1 mini** as the default model for orchestration and all phases, including classification, planning, generation, review, execution, and reporting.
+- Keep reasoning effort low for routine routing, formatting, uploads, and report generation. Use medium effort only when a phase has ambiguous requirements or a concrete failure to diagnose; do not use high effort by default.
+- Escalate a phase to **GPT-4.1** only after GPT-4.1 mini fails that phase for a reasoning or implementation issue, and only for the retry. Return to GPT-4.1 mini for subsequent phases. Do not escalate for external blockers such as unavailable services or credentials.
+- If a named model is unavailable in the active model picker, use its lowest-cost available mini model and record the actual model used in phase notes; do not silently select a larger model.
 - Orchestrator must avoid resending large payloads; prefer references to artifacts stored in state.
+- Token figures from hooks are transcript-growth estimates using `chars/4`, not provider token counts or billed usage. Do not sum the latest cumulative snapshot repeatedly; cumulative usage is the sum of schema-versioned interval estimates only. Keep phase estimates, cumulative ledger estimates, and provider billing data (if ever available) clearly distinct.

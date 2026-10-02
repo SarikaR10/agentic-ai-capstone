@@ -1,77 +1,101 @@
 'use strict';
-// SubagentStop: best-effort per-phase token estimate (chars/4 heuristic) appended to the run's
-// token_ledger.jsonl. Not billed usage — local session storage has no real per-event token data.
+// Measure transcript growth for each subagent interval; never re-add the full transcript.
 const fs = require('fs');
 const path = require('path');
-const { readStdin, findLatestRunDir, appendLine, readJsonSafe, writeJson, detectPhaseNumber, detectPhaseIdentifier } = require('./_util');
+const {
+  readStdin,
+  findRunDir,
+  appendLine,
+  readJsonSafe,
+  writeJson,
+  detectPhaseIdentifier,
+  transcriptCharCount,
+  transcriptDelta,
+  transcriptCursorKey,
+  readTokenLedger
+} = require('./_util');
 
 const input = readStdin();
 const cwd = input.cwd || process.cwd();
-const transcriptPath = input.transcript_path;
-const phase = detectPhaseIdentifier(input) || detectPhaseNumber(input);
-
-const runDir = findLatestRunDir(cwd);
+const event = String(process.argv[2] || input.hook_event_name || input.event || '').toLowerCase();
+const mode = event.includes('start') ? 'start' : 'stop';
+const transcriptPath = input.transcript_path || input.transcriptPath;
+const runDir = findRunDir(cwd, input);
 if (!runDir) process.exit(0);
 
-let estTokens = 0;
-const transcriptAvailable = Boolean(transcriptPath && fs.existsSync(transcriptPath));
-if (transcriptAvailable) {
-  try {
-    const size = fs.statSync(transcriptPath).size;
-    estTokens = Math.round(size / 4); // rough chars/4 heuristic
-  } catch {
-    estTokens = 0;
+const statePath = path.join(runDir, 'state.json');
+const state = readJsonSafe(statePath, {});
+const phaseInfo = detectPhaseIdentifier(input, state);
+const phase = phaseInfo.phase;
+const sessionId = input.session_id || input.sessionId || null;
+const cursorKey = transcriptCursorKey(sessionId, transcriptPath);
+const meterStatePath = path.join(runDir, 'token_meter_state.json');
+const meterState = readJsonSafe(meterStatePath, { schemaVersion: 1, cursors: {} });
+
+if (mode === 'start') {
+  const startChars = transcriptCharCount(transcriptPath);
+  if (startChars !== null) {
+    meterState.cursors[cursorKey] = {
+      sessionId,
+      startChars,
+      phase,
+      phaseSource: phaseInfo.source,
+      startedAt: new Date().toISOString()
+    };
+    writeJson(meterStatePath, meterState);
   }
+  process.exit(0);
 }
 
+const cursor = meterState.cursors[cursorKey] || null;
+const endChars = transcriptCharCount(transcriptPath);
+const deltaChars = cursor && endChars !== null
+  ? transcriptDelta(cursor.startChars, endChars)
+  : null;
+const intervalTokens = deltaChars === null ? null : Math.ceil(deltaChars / 4);
+const resolvedPhase = (cursor && cursor.phase) || phase;
+const attribution = cursor && cursor.phase
+  ? cursor.phaseSource
+  : phaseInfo.source;
 const ledgerPath = path.join(runDir, 'token_ledger.jsonl');
-let cumulative = estTokens;
-if (fs.existsSync(ledgerPath)) {
-  const lines = fs.readFileSync(ledgerPath, 'utf8').trim().split('\n').filter(Boolean);
-  const last = lines[lines.length - 1];
-  if (last) {
-    try {
-      cumulative += JSON.parse(last).cumulativeTotal || 0;
-    } catch {
-      // ignore malformed last line
-    }
-  }
-}
+const usage = readTokenLedger(ledgerPath);
+const cumulativeTotal = usage.estimatedEntries
+  ? usage.total + (intervalTokens || 0)
+  : intervalTokens;
 
 appendLine(ledgerPath, JSON.stringify({
+  schemaVersion: 2,
   ts: new Date().toISOString(),
-  phase,
-  sessionId: input.session_id || null,
-  estimatedPhaseTokens: transcriptAvailable ? estTokens : null,
-  tokenSource: transcriptAvailable ? 'transcript_chars_div_4' : 'unavailable',
-  cumulativeTotal: cumulative
+  event: 'SubagentStop',
+  phase: resolvedPhase,
+  phaseAttribution: attribution,
+  sessionId,
+  transcriptCharsAtStart: cursor ? cursor.startChars : null,
+  transcriptCharsAtStop: endChars,
+  transcriptCharsDelta: deltaChars,
+  estimatedIntervalTokens: intervalTokens,
+  tokenSource: intervalTokens === null ? 'unavailable' : 'transcript_growth_chars_div_4',
+  baselineStatus: cursor ? 'measured_interval' : 'missing_start_baseline',
+  legacyEntriesIgnored: usage.legacyEntriesIgnored,
+  cumulativeTotal,
+  cumulativeTotalAlias: cumulativeTotal
 }));
 
-// Hooks can provide elapsed time and an estimated total, but not separate prompt/completion billing.
-const statePath = path.join(runDir, 'state.json');
-const state = readJsonSafe(statePath, null);
-if (state && Array.isArray(state.phase_history)) {
-  const phaseOrder = [
-    'test-classification', 'read-jira', 'test-plan', 'test-case-generation',
-    'test-case-review', 'upload-jira', 'automation-generation',
-    'automation-review', 'automation-execution', 'report-generation',
-    'pr-creation', 'jira-close'
-  ];
-  const resolvedPhase = typeof phase === 'number' || /^\d+$/.test(String(phase))
-    ? phaseOrder[Number(phase)]
-    : phase;
-  const phaseEntry = state.phase_history.find((entry) =>
-    entry && entry.phase_name === resolvedPhase);
-  if (phaseEntry) {
-    const end = new Date();
-    phaseEntry.end_time = end.toISOString();
-    if (phaseEntry.start_time) {
-      phaseEntry.duration_ms = Math.max(0, end.getTime() - new Date(phaseEntry.start_time).getTime());
-    }
+if (cursor) {
+  delete meterState.cursors[cursorKey];
+  writeJson(meterStatePath, meterState);
+}
+
+// Add the hook estimate to the active phase when the state already has a matching phase entry.
+if (resolvedPhase && Array.isArray(state.phase_history) && intervalTokens !== null) {
+  const phaseEntry = [...state.phase_history].reverse().find((entry) =>
+    entry && entry.phase_name === resolvedPhase && String(entry.status).toLowerCase() === 'in_progress');
+  if (phaseEntry && (!phaseEntry.token_usage ||
+      phaseEntry.token_usage.source !== 'transcript_growth_chars_div_4')) {
     phaseEntry.token_usage = {
-      total: transcriptAvailable ? estTokens : null,
-      estimated: transcriptAvailable,
-      source: transcriptAvailable ? 'transcript_chars_div_4' : 'unavailable'
+      total: intervalTokens,
+      estimated: true,
+      source: 'transcript_growth_chars_div_4'
     };
     writeJson(statePath, state);
   }

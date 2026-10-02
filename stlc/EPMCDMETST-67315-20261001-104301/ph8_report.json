@@ -1,0 +1,108 @@
+{
+  "run_id": "EPMCDMETST-67315-20261001-104301",
+  "story_id": "EPMCDMETST-67315",
+  "phase": "report-generation",
+  "status": "COMPLETED_WITH_BLOCKERS",
+  "work_item": {
+    "summary": "Validate Inventory Network Response and UI Data Consistency",
+    "type": "Story",
+    "jira_status": "In Progress",
+    "linked_test_cases": [
+      {"key": "EPMCDMETST-67316", "status": "In Progress"},
+      {"key": "EPMCDMETST-67317", "status": "In Progress"},
+      {"key": "EPMCDMETST-67318", "status": "In Progress"}
+    ],
+    "pull_request": "Not authorized; no PR was created."
+  },
+  "classification": {
+    "workflow_type": "story",
+    "status": "PASS",
+    "rationale": "The supplied Jira metadata identifies EPMCDMETST-67315 as a Story."
+  },
+  "test_plan": {
+    "status": "PASS",
+    "scope": "Validate inventory loading from observed backend traffic through the Inventory UI, including successful and populated responses, product/detail consistency, displayed count, and loading-time errors.",
+    "scenarios": [
+      "Positive end-to-end validation of inventory response and displayed products/details/count.",
+      "Negative/error detection for unsuccessful or empty responses, client-side errors, and missing or inconsistent UI data.",
+      "Edge/data consistency comparison of the complete response and rendered product list, including first and last products and count."
+    ],
+    "framework": "Playwright Test"
+  },
+  "manual_test_cases": {
+    "count": 3,
+    "review_status": "PASS",
+    "cases": [
+      {"id": "EPMCDMETST-67315-TC-001", "title": "Load inventory and verify backend data in the UI", "coverage": "Positive end-to-end, UI, API/network, product details, displayed count, and loading errors."},
+      {"id": "EPMCDMETST-67315-TC-002", "title": "Detect inventory request, data, or loading errors", "coverage": "Unsuccessful/empty response detection, client-side loading errors, and missing or inconsistent UI data."},
+      {"id": "EPMCDMETST-67315-TC-003", "title": "Compare the complete inventory list and count with the response", "coverage": "Complete product-set and detail consistency, first/last products, and displayed count."}
+    ],
+    "review_summary": "All three cases passed test-case review for traceability, required coverage dimensions, and observable expected results."
+  },
+  "jira_upload": {
+    "status": "PASS",
+    "details": "The three linked test cases were created and are In Progress; the parent story is In Progress. No Jira update or story closure was performed during report generation."
+  },
+  "automation": {
+    "framework": "Playwright Test with TypeScript",
+    "mapped_approved_cases": 3,
+    "discovered_tests": 6,
+    "discovery": "Six tests were discovered across two files, including all three generated inventory cases.",
+    "review": {
+      "status": "FAIL",
+      "verdict": "OPEN_FIXES",
+      "history": [
+        "Initial review found missing loading-error assertions, uncovered separately displayed product-count assertions, and ambiguous response matching.",
+        "After retry 1, loading-error capture/assertions and unique response-candidate selection were added; the displayed-count gap remained and a duplicate manifest-property issue was identified.",
+        "After retry 2, duplicate manifest properties were removed and unique keys validated; the separately displayed product-count requirement remained uncovered. Final review remained OPEN_FIXES."
+      ],
+      "remaining_finding": "Automation compares rendered-card count with matched response-record count but does not locate or assert a separately displayed product-count value. This is not equivalent coverage."
+    },
+    "review_waiver": "The user authorized skipping the displayed-count review gate to proceed with execution only. The automation-review artifact remains FAIL; the waiver did not approve a test-case change or resolve the coverage gap."
+  },
+  "execution": {
+    "status": "ENVIRONMENT_BLOCKED",
+    "command": "npm run test:e2e",
+    "discovered": 6,
+    "passed": 0,
+    "failed": 6,
+    "zero_test_discovery": false,
+    "evidence": "All six tests stopped at page.goto('/') with net::ERR_CONNECTION_REFUSED at http://127.0.0.1/ before application interaction.",
+    "interpretation": "This is an environment connectivity blocker, not evidence of a product failure. No product behavior was verified; the run provides no pass/fail conclusion about inventory behavior.",
+    "browser_verification": {
+      "status": "BLOCKED",
+      "target": "Configured Playwright MCP server from .vscode/mcp.json (@playwright/mcp@0.0.82 --headless).",
+      "reason": "The configured Playwright MCP browser tool/server was unavailable to the worker session; no alternate browser tool was used."
+    },
+    "self_heal": "Not run. Failures occurred before application interaction because of environment connectivity, not demonstrated automation or product behavior."
+  },
+  "residual_risks": [
+    "The separately displayed inventory product count required by the approved cases is not asserted because repository/UI evidence did not identify a corresponding visible element. This remains uncovered and unverified.",
+    "Inventory network response, rendered product data, loading errors, and product-count behavior remain unverified because the application endpoint refused connections and browser verification was unavailable.",
+    "Automation review remains FAIL with verdict OPEN_FIXES despite the user-authorized progression waiver."
+  ],
+  "usage_estimates": {
+    "disclaimer": "All token figures below are estimates from recorded workflow/transcript data, not billed usage.",
+    "recorded_phase_estimates_before_report_generation": {
+      "estimated_tokens": 18700,
+      "basis": "Sum of the estimated token_usage totals recorded in run state for completed phases; excludes report-generation usage and phases recorded as zero/non-estimated."
+    },
+    "token_ledger_latest_cumulative_estimate": {
+      "estimated_tokens": 1038695,
+      "basis": "The token ledger's latest cumulative transcript_chars_div_4 estimate; a separate estimate and not comparable to the summed phase estimates."
+    }
+  },
+  "summary": "Three manual cases were generated, reviewed, and linked to the story. Playwright automation mapped all three cases and six tests were discovered. Automation review remains OPEN_FIXES because a separately displayed product count is not asserted; the user waived that progression gate only. All six execution tests failed before app interaction because http://127.0.0.1/ refused connections, and configured Playwright MCP verification was blocked. These are environmental blockers, not verified product failures. No product behavior was verified, no self-heal was run, no PR was created, and the story/test cases remain In Progress.",
+  "artifacts": [
+    "stlc/EPMCDMETST-67315-20261001-104301/ph0_classification.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph2_test_plan.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph4_test_case_review.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph4_upload_jira.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph5_automation_manifest.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph6_automation_review.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph7_execution.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/token_ledger.jsonl",
+    "playwright-report/index.html"
+  ]
+}

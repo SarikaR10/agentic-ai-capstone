@@ -1,0 +1,143 @@
+{
+  "run_id": "EPMCDMETST-67336-20261001-130000",
+  "story_id": "EPMCDMETST-67336",
+  "workflow_type": "story",
+  "current_phase": "report-generation",
+  "status": "PASS",
+  "blocker": null,
+  "phase_history": [
+    {
+      "phase_name": "test-classification",
+      "start_time": "2026-10-01T13:00:00Z",
+      "end_time": "2026-10-01T13:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "story_id:EPMCDMETST-67336; workflow_type:story",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph0_classification.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 0, "estimated": false, "source": "not run"},
+      "notes": "Story workflow explicitly selected by user."
+    },
+    {
+      "phase_name": "read-jira",
+      "start_time": "2026-10-01T13:00:00Z",
+      "end_time": "2026-10-01T13:00:00Z",
+      "duration_ms": 0,
+      "input_ref": "story_id:EPMCDMETST-67336",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph1_jira.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 0, "estimated": false, "source": "script execution"},
+      "notes": "Retrieved through scripts/read_jira.py."
+    },
+    {
+      "phase_name": "test-plan",
+      "start_time": "2026-10-01T13:01:00Z",
+      "end_time": "2026-10-01T13:01:02Z",
+      "duration_ms": 2000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph1_jira.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph2_test_plan.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 1400, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Three traceable scenarios cover cart removal from the Inventory and Cart pages."
+    },
+    {
+      "phase_name": "test-case-generation",
+      "start_time": "2026-10-01T13:01:02Z",
+      "end_time": "2026-10-01T13:01:05Z",
+      "duration_ms": 3000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph2_test_plan.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 1600, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Three manual cases generated: cart-page removal, inventory-page removal, and multi-item edge case."
+    },
+    {
+      "phase_name": "test-case-review",
+      "start_time": "2026-10-01T13:01:05Z",
+      "end_time": "2026-10-01T13:01:07Z",
+      "duration_ms": 2000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph4_test_case_review.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 900, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "All acceptance criteria and required coverage dimensions passed review."
+    },
+    {
+      "phase_name": "jira-upload",
+      "start_time": "2026-10-01T13:01:10Z",
+      "end_time": "2026-10-01T13:01:12Z",
+      "duration_ms": 2000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/approved_testcases.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph4_upload_jira.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 0, "estimated": false, "source": "script execution"},
+      "notes": "Created linked test cases EPMCDMETST-67337 through EPMCDMETST-67339 and moved them to In Progress."
+    },
+    {
+      "phase_name": "automation-generation",
+      "start_time": "2026-10-01T13:01:15Z",
+      "end_time": "2026-10-01T13:01:18Z",
+      "duration_ms": 3000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph4_test_case_review.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph5_automation_manifest.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 1500, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "The repository already contains a matching Playwright cart-removal suite."
+    },
+    {
+      "phase_name": "automation-review",
+      "start_time": "2026-10-01T13:01:18Z",
+      "end_time": "2026-10-01T13:01:20Z",
+      "duration_ms": 2000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph5_automation_manifest.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph6_automation_review.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 800, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "The tests align with the approved cart-removal requirements and use stable selectors."
+    },
+    {
+      "phase_name": "automation-execution",
+      "start_time": "2026-10-01T13:01:20Z",
+      "end_time": "2026-10-01T13:01:22Z",
+      "duration_ms": 2000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/ph5_automation_manifest.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph7_execution.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 600, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Verified against SauceDemo using the documented standard_user/secret_sauce profile: 3 tests passed in 10.1s."
+    },
+    {
+      "phase_name": "report-generation",
+      "start_time": "2026-10-01T13:01:22Z",
+      "end_time": "2026-10-01T13:01:25Z",
+      "duration_ms": 3000,
+      "input_ref": "stlc/EPMCDMETST-67336-20261001-130000/state.json",
+      "output_json": "stlc/EPMCDMETST-67336-20261001-130000/ph8_report.json",
+      "status": "PASS",
+      "retry_count": 0,
+      "token_usage": {"total": 700, "estimated": true, "source": "chars/4 workflow estimate"},
+      "notes": "Generated the final report after successful cart-removal verification."
+    }
+  ],
+  "artifacts": [
+    "stlc/EPMCDMETST-67336-20261001-130000/ph0_classification.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph1_jira.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph2_test_plan.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph4_test_case_review.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/approved_testcases.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph4_upload_jira.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph5_automation_manifest.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph6_automation_review.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph7_execution.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph8_report.json"
+  ]
+}

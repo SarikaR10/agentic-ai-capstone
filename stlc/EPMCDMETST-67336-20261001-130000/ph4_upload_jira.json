@@ -1,0 +1,22 @@
+{
+  "phase": "upload-jira",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "story_key": "EPMCDMETST-67336",
+    "created_test_cases": [
+      "EPMCDMETST-67337",
+      "EPMCDMETST-67338",
+      "EPMCDMETST-67339"
+    ],
+    "links": [
+      {"test_case": "EPMCDMETST-67337", "story": "EPMCDMETST-67336"},
+      {"test_case": "EPMCDMETST-67338", "story": "EPMCDMETST-67336"},
+      {"test_case": "EPMCDMETST-67339", "story": "EPMCDMETST-67336"}
+    ],
+    "status_transition": "In Progress"
+  },
+  "errors": [],
+  "artifacts": ["stlc/EPMCDMETST-67336-20261001-130000/ph4_upload_jira.json"],
+  "next_recommendation": "Start automation generation against the approved cases."
+}

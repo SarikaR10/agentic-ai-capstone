@@ -36,6 +36,7 @@
 - Preserve run artifacts under the project-configured run directory and retain existing artifact names for backward compatibility.
 - Reviews must return actionable findings. Execution results must distinguish passed, failed, blocked, and zero-test outcomes.
 - Do not claim a pull request, issue-tracker update, or ticket closure unless the required URL or artifact exists.
+- Before closing a Jira story, retrieve all linked test cases, close any that are `In Progress`, re-verify their statuses, and close the story only when every linked test case is `Closed`.
 
 ## Communication
 

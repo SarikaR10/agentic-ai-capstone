@@ -1,9 +1,17 @@
 {
   "phase": "jira-close",
-  "status": "SKIPPED",
+  "status": "PASS",
   "retry_count": 0,
-  "outputs": {"verdict": "NOT_APPLICABLE", "artifact_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph10_jira_close.json"},
-  "errors": ["No PR link exists, so the Jira comment and closure step cannot run."],
+  "outputs": {
+    "verdict": "PASS_WITH_ATTACHMENT_WARNING",
+    "comment_id": "15940264",
+    "comment_url": "https://jiraeu.epam.com/browse/EPMCDMETST-66225",
+    "jira_status": "Closed",
+    "attachment": "playwright-report/index.html",
+    "attachment_status": "FAILED_CLOUDFLARE_GATEWAY_CHALLENGE",
+    "artifact_ref": "stlc/EPMCDMETST-66225-20260923-195716/ph10_jira_close.json"
+  },
+  "errors": ["Jira comment and closure succeeded, but the index.html attachment upload was rejected by the Jira gateway Cloudflare challenge."],
   "artifacts": ["stlc/EPMCDMETST-66225-20260923-195716/ph10_jira_close.json"],
   "next_recommendation": "Resume after a PR is created and supplied to the Jira closure adapter."
 }

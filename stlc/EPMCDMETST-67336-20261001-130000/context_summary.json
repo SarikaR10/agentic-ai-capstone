@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-10-01T13:01:25Z",
+  "trigger": {
+    "thresholdRatio": 0.6,
+    "thresholdTokens": 30000,
+    "cumulativeTokens": 15150
+  },
+  "run": {
+    "runId": "EPMCDMETST-67336-20261001-130000",
+    "workflowType": "story",
+    "currentPhase": "report-generation",
+    "status": "PASS",
+    "retryCounts": {"automation-execution": 0},
+    "retryLimits": {"automation-execution": 2}
+  },
+  "completedPhases": [
+    "test-classification",
+    "read-jira",
+    "test-plan",
+    "test-case-generation",
+    "test-case-review",
+    "jira-upload",
+    "automation-generation",
+    "automation-review",
+    "automation-execution",
+    "report-generation"
+  ],
+  "artifacts": [
+    "stlc/EPMCDMETST-67336-20261001-130000/ph0_classification.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph1_jira.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph2_test_plan.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph3_test_cases.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph4_test_case_review.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph4_upload_jira.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph5_automation_manifest.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph6_automation_review.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph7_execution.json",
+    "stlc/EPMCDMETST-67336-20261001-130000/ph8_report.json",
+    "playwright/tests/cart.spec.ts"
+  ],
+  "latestTokenEntries": [
+    {
+      "ts": "2026-10-01T13:00:00Z",
+      "phase": "read-jira",
+      "sessionId": "workflow-session",
+      "estimatedPhaseTokens": 420,
+      "tokenSource": "transcript_chars_div_4",
+      "cumulativeTotal": 420
+    },
+    {
+      "ts": "2026-10-01T13:01:00Z",
+      "phase": "test-plan",
+      "sessionId": "workflow-session",
+      "estimatedPhaseTokens": 1400,
+      "tokenSource": "transcript_chars_div_4",
+      "cumulativeTotal": 1820
+    },
+    {
+      "ts": "2026-10-01T13:01:18Z",
+      "phase": "automation-review",
+      "sessionId": "workflow-session",
+      "estimatedPhaseTokens": 800,
+      "tokenSource": "transcript_chars_div_4",
+      "cumulativeTotal": 15150
+    }
+  ],
+  "nextAction": "The Story is verified; if Jira closure is required, complete the ticket-transition workflow separately."
+}

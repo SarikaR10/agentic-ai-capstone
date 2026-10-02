@@ -1,0 +1,2 @@
+{"schemaVersion":2,"run_id":"EPMCDMETST-67336-20261001-130000","phase":"read-jira","timestamp":"2026-10-01T13:00:00Z","estimatedPhaseTokens":420,"cumulativeTotal":420,"tokenSource":"transcript_chars_div_4","attributionSource":"explicit-phase"}
+{"schemaVersion":2,"run_id":"EPMCDMETST-67336-20261001-130000","phase":"automation-execution","timestamp":"2026-10-01T13:01:20Z","estimatedPhaseTokens":600,"cumulativeTotal":15150,"tokenSource":"transcript_chars_div_4","attributionSource":"explicit-phase"}

@@ -1,0 +1,39 @@
+{
+  "run_id": "EPMCDMETST-67315-20261001-104301",
+  "phase": "test-classification",
+  "workflow_type": "story",
+  "start_phase": "test-classification",
+  "status": "PASS",
+  "rationale": [
+    "The coordinator selected Resume, but no state.json exists for this run, so it is being treated as a fresh run.",
+    "The supplied Jira issue metadata identifies EPMCDMETST-67315 as a Story.",
+    "The story pipeline applies. Pull request creation is excluded unless explicitly authorized; execution healing and rerun are conditional on execution failure."
+  ],
+  "selected_phases": [
+    "test-classification",
+    "jira-read",
+    "test-plan",
+    "test-case-generation",
+    "test-case-review",
+    "jira-upload",
+    "automation-generation",
+    "automation-review",
+    "automation-execution",
+    "conditional-heal-and-execution-rerun",
+    "report-generation",
+    "jira-report-comment-and-close"
+  ],
+  "required_inputs": [
+    "Jira story metadata from stlc/EPMCDMETST-67315-20261001-104301/ph1_jira.json",
+    "Test plan output for test-case generation",
+    "Generated test cases and review approval for Jira upload and automation generation",
+    "Generated automation, project adapter context, and configured Playwright execution target for review and execution",
+    "Execution evidence and phase artifacts for report generation and Jira closure"
+  ],
+  "assumptions": [
+    "The provided Jira metadata is authoritative for classifying the work item as a Story.",
+    "No explicit authorization to create a pull request was supplied."
+  ],
+  "blockers": [],
+  "artifact_ref": "stlc/EPMCDMETST-67315-20261001-104301/ph0_classification.json"
+}

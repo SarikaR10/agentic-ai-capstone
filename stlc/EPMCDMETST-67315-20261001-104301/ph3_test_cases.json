@@ -1,0 +1,129 @@
+{
+  "phase": "test-case-generation",
+  "status": "PASS",
+  "retry_count": 0,
+  "outputs": {
+    "test_cases": [
+      {
+        "id": "EPMCDMETST-67315-TC-001",
+        "title": "Load inventory and verify backend data in the UI",
+        "type": [
+          "functional",
+          "smoke",
+          "positive end-to-end",
+          "UI",
+          "API",
+          "network"
+        ],
+        "priority": "High",
+        "preconditions": [
+          "Application is available.",
+          "standard_user / secret_sauce credentials are available.",
+          "Network capture is enabled."
+        ],
+        "steps": [
+          "Start network capture before logging in.",
+          "Log in with standard_user / secret_sauce and navigate to the Inventory page.",
+          "Identify the inventory-related request from captured browser traffic and inspect its response status and available product data.",
+          "Verify that the inventory page displays products, populated product details, and a product count.",
+          "Compare the response product data with the corresponding displayed product details and count."
+        ],
+        "expected_result": "The inventory-related request completes with a successful response code and populated product data. Products and their displayed details match the response data, the displayed product count is present and consistent with the products shown, and no client-side or server-side errors occur during inventory loading.",
+        "traceability": {
+          "test_plan_coverage": ["TP-01"],
+          "story_requirements": [
+            "Product data is successfully returned from backend services.",
+            "Network responses indicate successful processing.",
+            "Products displayed in the UI match the data returned by the backend service.",
+            "No client-side or server-side errors occur during inventory loading.",
+            "Products are displayed.",
+            "Product details are correct.",
+            "Product count is displayed."
+          ]
+        }
+      },
+      {
+        "id": "EPMCDMETST-67315-TC-002",
+        "title": "Detect inventory request, data, or loading errors",
+        "type": [
+          "functional",
+          "smoke",
+          "negative/error detection",
+          "UI",
+          "API",
+          "network"
+        ],
+        "priority": "High",
+        "preconditions": [
+          "Application is available.",
+          "standard_user / secret_sauce credentials are available.",
+          "Network capture is enabled."
+        ],
+        "steps": [
+          "Start network capture before logging in.",
+          "Log in with standard_user / secret_sauce and navigate to the Inventory page while observing the loading period.",
+          "Identify inventory-related traffic from the browser capture; record its status and whether product data is populated.",
+          "Observe the browser for client-side errors during inventory loading.",
+          "Check whether products, product details, or the displayed product count are missing or inconsistent; retain the observed status, response evidence, and UI evidence for any discrepancy."
+        ],
+        "expected_result": "The case passes only when the inventory-related response is successful and populated, no client-side or server-side errors occur during loading, and the required products, details, and count are present and consistent. Any unsuccessful inventory response, empty response data, client-side error, or missing/inconsistent UI data is a requirement failure and is recorded with available evidence. No particular fallback message or recovery behavior is expected.",
+        "traceability": {
+          "test_plan_coverage": ["TP-02"],
+          "story_requirements": [
+            "No client-side or server-side errors occur during inventory loading.",
+            "Network responses indicate successful processing.",
+            "Response data is populated.",
+            "Products are displayed.",
+            "Product details are correct.",
+            "Product count is displayed."
+          ]
+        }
+      },
+      {
+        "id": "EPMCDMETST-67315-TC-003",
+        "title": "Compare the complete inventory list and count with the response",
+        "type": [
+          "functional",
+          "smoke",
+          "edge/data consistency",
+          "UI",
+          "API",
+          "network"
+        ],
+        "priority": "Medium",
+        "preconditions": [
+          "Application is available.",
+          "standard_user / secret_sauce credentials are available.",
+          "Network capture is enabled."
+        ],
+        "steps": [
+          "Start network capture before logging in.",
+          "Log in with standard_user / secret_sauce and navigate to the Inventory page.",
+          "Identify the inventory-related response and use its available product records and fields as the comparison source.",
+          "Compare the complete set of response products with the complete set of products displayed in the UI, including the first and last displayed products.",
+          "For each corresponding product, compare the displayed details with the available response values, and compare the displayed product count with the response product records and rendered products."
+        ],
+        "expected_result": "Every response product is represented in the UI exactly once, no product is spuriously displayed, and each displayed product's available details match its corresponding response values. The displayed count is present and consistent with both the response product records and rendered products. The comparison uses the actual captured response and does not assume fixed product counts or specific response field names.",
+        "traceability": {
+          "test_plan_coverage": ["TP-03"],
+          "story_requirements": [
+            "Response data is populated.",
+            "Products displayed in the UI match the data returned by the backend service.",
+            "Product details are correct.",
+            "Product count is displayed."
+          ]
+        }
+      }
+    ],
+    "artifact_refs": [
+      "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.json",
+      "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.md"
+    ]
+  },
+  "errors": [],
+  "artifacts": [
+    "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.json",
+    "stlc/EPMCDMETST-67315-20261001-104301/ph3_test_cases.md"
+  ],
+  "next_recommendation": "Review the generated test cases for coverage and traceability before Jira upload."
+}
